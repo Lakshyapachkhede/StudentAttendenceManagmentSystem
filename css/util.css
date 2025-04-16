@@ -1,0 +1,62 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --color-primary: #217346;         /* Excel Green */
+/*  --color-primary-light: #DFF3E3;   */ /* Soft Green */
+  --color-primary-light: #7ac735;   /* Soft Green */
+  --color-accent: #FFB84D;          /* Orange Tint */
+  --color-background: #F9F9F9;      /* Light Gray/White */
+  --color-text-dark: #2d333a;       /* Deep Charcoal */
+  --color-highlight: #FFF9C4;       /* Pale Yellow */
+  --color-info: #00bcfe;            /* Calm Blue (Optional) */
+
+}
+
+
+
+.d-fcc{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container-l{
+	max-width: 1050px;
+	margin: 0 auto;
+
+}
+
+.ul-sn{
+	list-style: none;
+}
+
+a{
+	text-decoration: none;
+	color:var(--color-text-dark) ;
+}
+
+.m0{
+	margin: 0;
+}
+.tti{
+	text-transform: initial;
+}
+
+.fr{
+font-family: "Roboto", sans-serif;
+}
+
+.fp{
+			font-family: "Poppins", sans-serif;
+}
+
+.fq{
+	font-family: "Quicksand", sans-serif;
+}
+
+
+
+.ml20{
+	margin-left: 20px;
+}
