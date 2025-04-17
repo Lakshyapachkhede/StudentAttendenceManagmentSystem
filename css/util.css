@@ -5,7 +5,7 @@
   --color-primary: #217346;         /* Excel Green */
 /*  --color-primary-light: #DFF3E3;   */ /* Soft Green */
   --color-primary-light: #7ac735;   /* Soft Green */
-  --color-accent: #FFB84D;          /* Orange Tint */
+  --color-accent: #ff9900;          /* Orange Tint */
   --color-background: #F9F9F9;      /* Light Gray/White */
   --color-text-dark: #2d333a;       /* Deep Charcoal */
   --color-highlight: #FFF9C4;       /* Pale Yellow */
@@ -23,7 +23,8 @@
 
 .container-l{
 	max-width: 1050px;
-	margin: 0 auto;
+	margin: 100px auto 0px;
+	min-height: 100vh;
 
 }
 
@@ -37,7 +38,11 @@ a{
 }
 
 .m0{
-	margin: 0;
+	margin: 0 !important;
+}
+.p0{
+	padding: 0 !important;
+
 }
 .tti{
 	text-transform: initial;
@@ -59,4 +64,42 @@ font-family: "Roboto", sans-serif;
 
 .ml20{
 	margin-left: 20px;
+}
+
+.back-l{
+	background: var(--color-background);
+}
+
+.d-f-col{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tac{
+	text-align: center;
+}
+
+.mb10{
+	margin-bottom: 10px;
+}
+
+.mt10{
+	margin-top: 10px;
+}
+.mt20{
+	margin-top: 10px;
+}
+
+.jc-sb{
+	justify-content: space-between;
+}
+
+.mr10{
+	margin-right: 10px;
+}
+
+.t-warn{
+	color: var(--color-accent);
 }

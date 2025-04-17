@@ -147,3 +147,52 @@
 	background: white;
 	color: var(--color-primary-light);
 }
+
+
+.form{
+	background: white;
+	border-radius: 5px;
+	border: 1px solid grey;
+	margin: auto auto;
+	padding: 20px;
+	width: 500px;
+}
+
+.f-input{
+	width: 80%;
+	border-radius: 5px;
+	border: 1px solid grey;
+	padding: 10px;
+	color: var(--color-text-dark);
+	margin: 5px;
+	outline: none;
+	background: var(--color-background);
+}
+
+.f-btn{
+		width: 80%;
+	padding: 10px 20px; 
+	background: var(--color-primary-light);
+	color: white;
+	outline: none;
+	border-radius: 5px;
+	border: 0;
+	cursor: pointer;
+}
+.input-none{
+	border: 0;
+	outline: 0;
+	margin: 0;
+}
+
+.link-sm{
+	color: var(--color-info);
+	text-decoration: underline;
+}
+
+.input-icon{
+	width: 24px;
+	align-self: center;
+	margin-right: 5px;
+	cursor: pointer;
+}

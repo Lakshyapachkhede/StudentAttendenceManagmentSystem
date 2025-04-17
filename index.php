@@ -29,7 +29,7 @@
 				<p>Attendance is one of those administrative tasks that must be done at the start of each class. It can take up valuable time at the beginning of class and sometimes be difficult to manage. Attendance books traditionally are big grids with tiny squares that are hard to read and can be easy to make errors in. With QuickSchools' Online Student Information System (also known as Online School Management System), taking and managing attendance is no longer a hassle with our easy to use and robust school attendance system.</p>
 			</div>
 			<div class="content-row">
-			
+
 				<p>Online Parent Tracking</p>
 			</div>
 			<div class="content-row">
@@ -49,17 +49,17 @@
 
 
 	</div>
-			<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<div class="label">
-			<p>Experience Effortless Attendence Management with SAM System  <a href="#" class="btn-l ml20">Sign Up For Free</a></p>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="label">
+		<p>Experience Effortless Attendence Management with SAM System  <a href="auth/signup.php" class="btn-l ml20">Sign Up For Free</a></p>
 
-		</div>
+	</div>
 
 
 

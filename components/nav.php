@@ -1,7 +1,7 @@
 		<nav class="navbar d-fcc">
 
 			<div class="nav-left d-fcc">
-				<img src="img/logo.png" alt="Logo" class="logo">
+				<img src="/attendence/img/logo.png" alt="Logo" class="logo">
 				<p><span>Sam</span>System</p> 
 			</div>
 
@@ -14,8 +14,8 @@
 				</ul>
 
 				<ul class="nav-buttons-ul d-fcc ul-sn">
-					<li><a href="" class="login-link">Log In</a></li>
-					<li><a href="" class="btn-o">Sign Up</a></li>
+					<li><a href="/attendence/auth/login.php" class="login-link">Log In</a></li>
+					<li><a href="/attendence/auth/signup.php" class="btn-o">Sign Up</a></li>
 				</ul>
 			</div>
 
