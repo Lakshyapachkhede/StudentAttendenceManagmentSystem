@@ -1,3 +1,24 @@
+<?php 
+	
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (isset($_SESSION['login'])){
+	if ($_SESSION['type'] == 'admin'){
+		header("Location: admin/dashboard.php");
+	}
+	else if ($_SESSION['type'] == 'teacher'){
+		header("Location: teacher/dashboard.php");
+	} else {
+		header("Location: student/dashboard.php");
+
+	}
+
+}
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

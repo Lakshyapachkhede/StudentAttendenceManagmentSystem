@@ -1,5 +1,7 @@
-<?php
 
+
+<?php
+// bypassing verifying email for now 
 $error = "";
 session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){

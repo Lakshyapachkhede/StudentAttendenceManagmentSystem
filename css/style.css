@@ -64,22 +64,7 @@
 .nav-buttons-ul{
 	gap: 10px;
 }
-.btn-o{
-	border: 2px solid var(--color-primary-light);
-	padding: 10px 20px;
-	font-weight: normal;
-	color: var(--color-primary-light);
-	border-radius: 3px;
-	transition: all 0.5s ease-out;
 
-
-
-}
-
-.btn-o:hover{
-	background: var(--color-primary-light);
-	color: white;
-}
 
 .login-link{
 	margin: 0;
@@ -195,4 +180,57 @@
 	align-self: center;
 	margin-right: 5px;
 	cursor: pointer;
+}
+
+
+.admin-card{
+	width: 20%;
+	height: 100%;
+
+ box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+ padding: 20px;
+ border-radius: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-4px);
+box-shadow: 4px 4px 12px var(--color-primary-light);
+
+}
+.admin-card-num{
+	font-size: 3rem;
+	font-family: "Poppins", sans-serif;
+
+}
+
+.admin-card-text{
+	font-size: 18px;
+	margin-top: 50px;
+/*	font-weight: 600;*/
+
+}
+
+
+.user-row{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 80%;
+	background:  var(--color-background);
+	padding: 20px;
+	border-radius: 5px;
+	border: 1px solid grey;
+	margin: 10px auto;
+}
+
+.user-row-left{
+
+}
+
+.user-row-right{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
 }

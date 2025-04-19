@@ -19,9 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$error = "Please fill all fields correctly.";
 	}
 
+	else if (strlen($password) < 6){
+		$error = "passwords length must be more than six characters";
+
+	}
 	else if ($password != $cpassword){
 		$error = "passwords don't match";
 	}
+
+
 
 
 	$stmt = $conn->prepare("SELECT id FROM user WHERE email = ? ");
@@ -35,6 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	}
 	else{
 		$stmt->close();
+
+	// NOTE: bypassing verifying email for now 
 
 		// $otp = rand(100000, 999999);
 
@@ -61,10 +69,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$stmt = $conn->prepare("INSERT INTO user (name, email, password, type) VALUES(?, ?, ?, ?)");
 		$stmt->bind_param("ssss", $name,$email, $hashed_password, $type);
 
+
 		if ($stmt->execute()){
-			header("Location: login.php");
+
+			$user_id = $conn->insert_id;
+
+			$stmt2 = $conn->prepare("INSERT INTO signuprequests (user_id) VALUES(?)");
+			$stmt2->bind_param("i", $user_id);
+			$stmt2->execute();
+			$stmt2->close();
+
+
 			$stmt->close();
 			$conn->close();
+
+			header("Location: login.php");
+			exit();
+
 		} else {
 			$error = "Failed to create account";
 		}
@@ -100,11 +121,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 			<h1 class="tac mb10">Sign Up to SamSystem</h1>
 
-			<input type="email" name="email" class="f-input" placeholder="enter your email" required value="<?php if (isset($email)) {echo "$email";}?>">
-			<input type="text" name="name"class="f-input" placeholder="enter your name" required value="<?php if (isset($name)) {echo "$name";}?>">
+			<input type="email" name="email" class="f-input" placeholder="enter your email" required value="<?php if (isset($email)) {echo "$email";}?>" autocomplete="email">
+			<input type="text" name="name"class="f-input" placeholder="enter your name" required value="<?php if (isset($name)) {echo "$name";}?>" autocomplete="name">
 
 			<?php if ($error != ""){
-				echo "<p class='mb10 mt20 t-warn'>$error<p>";
+				echo "<p class='mb10 mt20 t-warn'>$error</p>";
 			}?>
 
 			<div class="f-input p0 d-fcc jc-sb">

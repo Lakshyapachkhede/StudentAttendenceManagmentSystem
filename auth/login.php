@@ -1,3 +1,76 @@
+<?php
+require '../db/db_connector.php';
+$error = "";
+session_start();
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+
+	$email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
+	$password = $_POST['password'];
+
+
+
+	if (!$email || !$password) {
+		$error = "Please fill all fields correctly.";
+	}
+
+	$stmt = $conn->prepare("SELECT * FROM user WHERE email = ? ");
+	$stmt->bind_param("s", $email);
+	$stmt->execute();
+	$result = $stmt->get_result();
+
+	if ($result->num_rows === 1) {
+		$user = $result->fetch_assoc();
+		if (password_verify($password, $user['password'])){
+			$_SESSION['login'] = true;
+			$_SESSION['user_id'] = $user["id"];
+			$_SESSION['email'] = $email;
+			$_SESSION['name'] = $user["name"];
+			$_SESSION['type'] = $user["type"];
+			$_SESSION['approved'] = $user["approved"];
+
+			switch ($_SESSION['type']) {
+				case 'admin':
+				header("Location: /attendence/admin/dashboard.php");
+				break;
+				case 'teacher':
+				header("Location: /attendence/teacher/dashboard.php");
+				break;
+				case 'student':
+				header("Location: /attendence/student/dashboard.php");
+				break;
+			}
+			exit;
+
+
+
+		}
+		else {
+			$error = "Incorect password";
+
+		}
+	}
+
+	else {
+		$error = "Email does not exist. Sign up instead";
+
+	}
+
+
+
+
+
+
+
+
+}
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,16 +86,20 @@
 
 		<?php  require '../components/nav.php';?>
 
-		<div class="form d-f-col">
+		<form class="form d-f-col" action="login.php" method="POST">
 
 			<h1 class="tac mb10">Log In to SamSystem</h1>
 
-			<input type="email" name="email" class="f-input" placeholder="enter your email">
+			<input type="email" name="email" class="f-input" placeholder="enter your email" value="<?php if (isset($email)) {echo "$email";}?>" required>
 
 			<div class="f-input p0 d-fcc jc-sb">
-				<input type="password" name="password" placeholder="password" class=" f-input input-none " id="password">
+				<input type="password" name="password" placeholder="password" class=" f-input input-none " id="password" required minlength="6">
 				<img src="\attendence\img\show.png" alt="Show" class="input-icon" id="password-icon">
 			</div>		
+
+			<?php if ($error != ""){
+				echo "<p class='mb10 mt20 t-warn'>$error</p>";
+			}?>
 
 			<button type="submit" class="f-btn mb10 mt20">Log In</button>
 
@@ -32,7 +109,7 @@
 	</div>
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
 		let passIcon = document.getElementById("password-icon");
 		let passwordInput = document.getElementById("password");
 
