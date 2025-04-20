@@ -6,7 +6,7 @@
 /*  --color-primary-light: #DFF3E3;   */ /* Soft Green */
   --color-primary-light: #7ac735;   /* Soft Green */
   --color-accent: #ff9900;          /* Orange Tint */
-  --color-background: #efefef;      /* Light Gray/White */
+  --color-background: #D3D3D3;      /* Light Gray/White */
   --color-text-dark: #2d333a;       /* Deep Charcoal */
   --color-highlight: #FFF9C4;       /* Pale Yellow */
   --color-info: #00bcfe;            /* Calm Blue (Optional) */
@@ -68,6 +68,10 @@ font-family: "Roboto", sans-serif;
 
 .ml20{
 	margin-left: 20px;
+}
+
+.ml10{
+	margin-left: 10px;
 }
 
 .back-l{
@@ -153,4 +157,22 @@ font-family: "Roboto", sans-serif;
 
 .btn-r:hover{
 	background: var(--color-red-dark);
+}
+
+
+
+.btn-form{
+	float: right;
+	padding: 15px 50px;
+
+	align-self: center;
+}
+
+.as-c{
+	align-self: center;
+
+}
+
+.td-u{
+	text-decoration: underline;
 }

@@ -72,14 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		if ($stmt->execute()){
 
-			$user_id = $conn->insert_id;
-
-			$stmt2 = $conn->prepare("INSERT INTO signuprequests (user_id) VALUES(?)");
-			$stmt2->bind_param("i", $user_id);
-			$stmt2->execute();
-			$stmt2->close();
-
-
 			$stmt->close();
 			$conn->close();
 

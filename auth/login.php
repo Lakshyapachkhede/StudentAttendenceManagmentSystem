@@ -2,6 +2,27 @@
 require '../db/db_connector.php';
 $error = "";
 session_start();
+
+function checkProfileExists($conn, $id, $type)
+{
+	if ($type == 'teacher') {
+		$stmt = $conn->prepare("SELECT * FROM teacher_profile WHERE teacher_id = ?");
+	} else {
+		$stmt = $conn->prepare("SELECT * FROM student_profile WHERE student_id = ?");
+	}
+	$stmt->bind_param("i", $id);
+	$stmt->execute();
+	$stmt->store_result();
+
+	if ($stmt->num_rows > 0){
+		return true;
+	}
+
+	return false;
+
+
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
@@ -34,10 +55,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				header("Location: /attendence/admin/dashboard.php");
 				break;
 				case 'teacher':
-				header("Location: /attendence/teacher/dashboard.php");
+				if (!checkProfileExists($conn, $_SESSION['user_id'], "teacher")){
+					header("Location: /attendence/teacher/profile.php?action=create&id=". $user['id']);
+				} else {
+					header("Location: /attendence/teacher/dashboard.php");
+				}
 				break;
 				case 'student':
-				header("Location: /attendence/student/dashboard.php");
+				if (!checkProfileExists($conn, $_SESSION['user_id'], "student")){
+					header("Location: /attendence/student/profile.php?action=create&id=". $user['id']);
+				}
+				else {
+
+					header("Location: /attendence/student/dashboard.php");
+				}
 				break;
 			}
 			exit;
@@ -105,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 			<p class="p-sm tac mt10">Don't have an account? <a href="signup.php" class="link-sm">Signup</a></p>
 
-		</div>
+		</form>
 	</div>
 
 

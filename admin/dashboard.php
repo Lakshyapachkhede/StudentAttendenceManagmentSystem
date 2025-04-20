@@ -118,7 +118,6 @@ $numTeacher = getTotalUsers($conn, "teacher");
 
 
 		<div class="d-f-col mt40">
-			<h1 class="mb20">New User Approval Requests</h1>
 
 			<?php 
 			$status = "pending";
@@ -127,15 +126,18 @@ $numTeacher = getTotalUsers($conn, "teacher");
 
 			$stmt->execute();
 			$result = $stmt->get_result();
-
+			if ($result->num_rows > 0){
+				echo "<h1 class='mb20'>New User Approval Requests</h1>";
+			}
 			while ($row = $result->fetch_assoc()) {
 				$user_id = $row['user_id'];
-				$user = $conn->query("SELECT name, date_created, type FROM user WHERE id = $user_id ")->fetch_assoc();
+				$user = $conn->query("SELECT id,name, date_created, type FROM user WHERE id = $user_id ")->fetch_assoc();
+
 
 
 				echo"<div class='user-row'>
 				<div class='user-row-left'>
-				<p class='user-row-name'>" . $user['name'] . "</p>
+				<a class='user-row-name td-u' href='/attendence/" . $user['type']. "/profile.php?id=". $user['id'] . "&action=view'>" . $user['name'] . "</a>
 				<p class='user-row-date'>Date:".  $user['date_created']. " </p>
 				<p class='user-row-type'>type: " . $user['type']. "</p>
 				</div>

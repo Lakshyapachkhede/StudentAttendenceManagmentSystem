@@ -45,9 +45,9 @@
 
 
 .nav-right{
-	gap: 40px;
-	font-weight: 700;
-	font-size: 14px;
+/*	gap: 40px;*/
+font-weight: 700;
+font-size: 14px;
 }
 
 .nav-links{
@@ -146,16 +146,16 @@
 .f-input{
 	width: 80%;
 	border-radius: 5px;
-	border: 1px solid grey;
+	border: 1px solid #ccc;
 	padding: 10px;
 	color: var(--color-text-dark);
 	margin: 5px;
 	outline: none;
-	background: var(--color-background);
+
 }
 
 .f-btn{
-		width: 80%;
+	width: 80%;
 	padding: 10px 20px; 
 	background: var(--color-primary-light);
 	color: white;
@@ -187,15 +187,15 @@
 	width: 20%;
 	height: 100%;
 
- box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
- padding: 20px;
- border-radius: 20px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	border-radius: 20px;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .admin-card:hover {
-  transform: translateY(-4px);
-box-shadow: 4px 4px 12px var(--color-primary-light);
+	transform: translateY(-4px);
+	box-shadow: 4px 4px 12px var(--color-primary-light);
 
 }
 .admin-card-num{
@@ -234,3 +234,95 @@ box-shadow: 4px 4px 12px var(--color-primary-light);
 	align-items: center;
 	gap: 10px;
 }
+
+
+.nav-small{
+	background: var(--color-background);
+	padding: 10px;
+	width: 100%;
+	position: sticky;
+	top: 0;
+	left: 0;
+}
+
+.profile{
+	background: var(--color-background);
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
+	gap: 30px;
+	margin-top: 50px;
+	padding: 20px;
+}
+
+.profile-left{
+	background-color: var(--color-text-dark) ;
+	height: 100%;
+	flex-basis: 30%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 20px;
+	text-align: justify;
+
+}
+
+.profile-left img{
+	width: 80px;
+}
+
+.profile-left .profile-name{
+	color: white;
+	font-size: 24px;
+}
+
+.profile-bio{
+	color: white;
+}
+
+.container{
+	margin-top: 5px;
+	max-width: 1050px;
+	margin: auto auto;
+}
+
+.profile-right{
+	flex-basis: 70%;
+	background-color: white;
+	padding: 10px;
+
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	flex-direction: column;
+
+
+}
+
+.profile-table td{
+	padding: 10px;
+}
+
+.text-dark{
+	color: var(--color-text-dark);
+	font-weight: 700;
+}
+
+.text-light{
+	color: var(--color-background);
+
+
+}      
+select {
+	padding: 10px;
+	width: 80%;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	outline: none;
+	color: var(--color-text-dark);
+	margin: 5px;
+}
+
+
+
