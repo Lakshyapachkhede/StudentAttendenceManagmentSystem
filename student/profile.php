@@ -39,6 +39,8 @@ function checkError($conn , $email, $roll_no, &$error, $id){
 		}
 	}
 
+
+
 	$stmt = $conn->prepare("SELECT roll_no FROM student_profile WHERE roll_no = ?");
 	$stmt->bind_param("s", $roll_no);
 	$stmt->execute();
@@ -69,11 +71,52 @@ function checkError($conn , $email, $roll_no, &$error, $id){
 
 }
 
+function checkProfileExists($conn, $id)
+{
+
+	$stmt = $conn->prepare("SELECT student_id FROM student_profile WHERE student_id = ?");
+	$stmt->bind_param("i", $id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+
+
+	if($result->num_rows > 0){
+		echo "true";
+		return true;
+	}
+
+		echo "fasle";
+	return false;
+}
+
+
 $action = $_GET['action'] ?? "view";
 $id = $_GET['id'] ?? null;
 
+if ($id == null){
+	die("Invalid Parameters");
+}
+
+$valid_actions = ["view", "create", "update"];
+
+if (!in_array($action, $valid_actions)) {
+    header("Location: ?action=view&id=$id");
+    exit();
+}
+
 if ($action == "create" || $action == "update"){
 	requireType("student");
+	if ($_SESSION["user_id"] != $id){
+			echo "Unauthorized access";
+			exit();
+	}
+}
+
+if ($action == "create" && checkProfileExists($conn, $id))
+{
+
+	header("Location: ?action=update&id=$id");
+
 }
 
 $isPost = $_SERVER['REQUEST_METHOD'] === 'POST';
@@ -97,9 +140,6 @@ if ($isPost){
 
 		if(!checkError($conn , $email, $roll_no, $error, $student_id))
 		{
-
-
-
 
 
 			$stmt = $conn->prepare("INSERT INTO student_profile (student_id, roll_no, branch, bio) VALUES (?, ?, ?, ?)");
@@ -129,8 +169,6 @@ if ($isPost){
 
 		if(!checkError($conn , $email, $roll_no,$error, $student_id))
 		{
-
-
 			$stmt = $conn->prepare("UPDATE student_profile SET roll_no=?, branch=?, bio=? WHERE student_id=?");
 			$stmt->bind_param("sisi", $roll_no, $branch, $bio, $student_id);
 			$stmt->execute();

@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db   = 'samsystemattendencedb';
+$db   = 'samdb';
 $user = 'root';
 $pass = '';
 
