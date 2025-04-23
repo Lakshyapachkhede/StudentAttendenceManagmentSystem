@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2025 at 04:51 PM
+-- Generation Time: Apr 23, 2025 at 04:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `samdb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attends`
+--
+
+CREATE TABLE `attends` (
+  `student_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `date_joined` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `attends`
+--
+
+INSERT INTO `attends` (`student_id`, `class_id`, `date_joined`) VALUES
+(7, 3, '2025-04-23 19:41:53'),
+(7, 4, '2025-04-23 19:41:03'),
+(7, 5, '2025-04-23 19:40:26'),
+(8, 4, '2025-04-23 19:50:25'),
+(8, 5, '2025-04-23 19:50:28');
 
 -- --------------------------------------------------------
 
@@ -44,6 +67,43 @@ INSERT INTO `branch` (`id`, `full_name`, `initials`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `class`
+--
+
+CREATE TABLE `class` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `teacher_id` int(11) DEFAULT NULL,
+  `date_created` datetime DEFAULT current_timestamp(),
+  `branch` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `class`
+--
+
+INSERT INTO `class` (`id`, `name`, `description`, `teacher_id`, `date_created`, `branch`) VALUES
+(3, 'Data Structure ', 'I love data structure', 5, '2025-04-23 14:30:22', 2),
+(4, 'maths 101', 'this is basic maths for polytechnic students', 5, '2025-04-23 14:33:39', 2),
+(5, 'Computer Network', 'This is the best class on computer network ever', 5, '2025-04-23 18:51:53', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `join_requests`
+--
+
+CREATE TABLE `join_requests` (
+  `student_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `teacher_id` int(11) DEFAULT NULL,
+  `requested_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `signuprequests`
 --
 
@@ -53,6 +113,15 @@ CREATE TABLE `signuprequests` (
   `status` enum('pending','approved','declined') NOT NULL DEFAULT 'pending',
   `date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `signuprequests`
+--
+
+INSERT INTO `signuprequests` (`id`, `user_id`, `status`, `date`) VALUES
+(3, 5, 'approved', '2025-04-21'),
+(4, 7, 'pending', '2025-04-22'),
+(5, 8, 'pending', '2025-04-22');
 
 -- --------------------------------------------------------
 
@@ -67,6 +136,14 @@ CREATE TABLE `student_profile` (
   `bio` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `student_profile`
+--
+
+INSERT INTO `student_profile` (`student_id`, `roll_no`, `branch`, `bio`) VALUES
+(7, '23031C04099', 2, 'I am yash pachkhede'),
+(8, '23031C04053', 1, 'I am cool.');
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +155,13 @@ CREATE TABLE `teacher_profile` (
   `about` varchar(200) NOT NULL,
   `branch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `teacher_profile`
+--
+
+INSERT INTO `teacher_profile` (`teacher_id`, `about`, `branch`) VALUES
+(5, 'I am HOD of computer Science Department. and leader', 1);
 
 -- --------------------------------------------------------
 
@@ -100,17 +184,44 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `type`, `approved`, `date_created`) VALUES
-(3, 'admin', 'admin@gmail.com', '$2y$10$dKI17tdgqhtTeHqt9pqn/OOWjh6RfjyKKs/jMnkv9NV.SvDZZ6qES', 'admin', 1, '2025-04-21');
+(3, 'admin', 'admin@gmail.com', '$2y$10$dKI17tdgqhtTeHqt9pqn/OOWjh6RfjyKKs/jMnkv9NV.SvDZZ6qES', 'admin', 1, '2025-04-21'),
+(5, 'Deepesh yadav', 'deepeshyadav@gmail.com', '$2y$10$/GcGEXuMStjlHif5Qw1fDeyPOOzwQZ0gXio/z3JdVNYTCrFoWu.H2', 'teacher', 1, '2025-04-21'),
+(7, 'Yash Pachkhede', 'pachkhedeyash@gmail.com', '$2y$10$mF.6erYaUmsy4wIzQ31iCeE8LSDGG6gK0XkvmC4PVpCSuzgZIeky.', 'student', 0, '2025-04-22'),
+(8, 'Lakshya Pachkhede', 'pachkhedelakshya@gmail.com', '$2y$10$j90UzRUe4fctEAgggnzSfuaik1AgfEUDMsRR51j3YdSGGnrS9XNt.', 'student', 0, '2025-04-22'),
+(10, 'Anand Pachkhede', 'anand@gmail.com', '$2y$10$.3GdoyXrgm8GdAbjUxkb0uVhH17z80y.Wk.0Q4UwQRALuK44R73HG', 'student', 0, '2025-04-23');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `attends`
+--
+ALTER TABLE `attends`
+  ADD PRIMARY KEY (`student_id`,`class_id`),
+  ADD KEY `class_id` (`class_id`);
+
+--
 -- Indexes for table `branch`
 --
 ALTER TABLE `branch`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `class`
+--
+ALTER TABLE `class`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_teacher_id` (`teacher_id`),
+  ADD KEY `branch_fk` (`branch`);
+
+--
+-- Indexes for table `join_requests`
+--
+ALTER TABLE `join_requests`
+  ADD PRIMARY KEY (`student_id`,`class_id`),
+  ADD KEY `class_id` (`class_id`),
+  ADD KEY `teacher_id` (`teacher_id`);
 
 --
 -- Indexes for table `signuprequests`
@@ -152,20 +263,48 @@ ALTER TABLE `branch`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `class`
+--
+ALTER TABLE `class`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `signuprequests`
 --
 ALTER TABLE `signuprequests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `attends`
+--
+ALTER TABLE `attends`
+  ADD CONSTRAINT `attends_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `attends_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `class`
+--
+ALTER TABLE `class`
+  ADD CONSTRAINT `branch_fk` FOREIGN KEY (`branch`) REFERENCES `branch` (`id`),
+  ADD CONSTRAINT `fk_teacher_id` FOREIGN KEY (`teacher_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `join_requests`
+--
+ALTER TABLE `join_requests`
+  ADD CONSTRAINT `join_requests_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`),
+  ADD CONSTRAINT `join_requests_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `join_requests_ibfk_3` FOREIGN KEY (`teacher_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `signuprequests`

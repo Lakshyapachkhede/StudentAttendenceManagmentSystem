@@ -18,7 +18,7 @@ $teacher_name = $conn->query("SELECT name from user WHERE id = $teacher_id")->fe
 
 
 
-
+$message = "Link Copied to Clipboard";
 
 
 ?>
@@ -48,7 +48,15 @@ $teacher_name = $conn->query("SELECT name from user WHERE id = $teacher_id")->fe
 						<p> <?php echo (new DateTime($class_data["date_created"]))->format('F j, Y'); ?></p>
 					</div>
 
-					<img src="/attendence/img/share.png" style="width: 20px;" id="shareBtn">
+					<?php if ($_SESSION['type'] == "teacher"):?>
+						<img src="/attendence/img/copy.png"  class="icon" id="shareBtn">
+					<?php else: ?>	
+						<a class="btn" href="/attendence/student/join_class.php?id=<?=$class_id?>">Join</a>
+
+
+					<?php endif; ?>
+
+
 
 				</div>
 
@@ -65,9 +73,30 @@ $teacher_name = $conn->query("SELECT name from user WHERE id = $teacher_id")->fe
 
 	</div>
 
+
+
+
+
+
+
+
+	<div class="alert" id="alert">
+		<img src="/attendence/img/check.png" alt="Check Mark">
+		<p class="f-r"><?= $message ?></p>
+	</div>
+
+	<?php require '../components/alert.php';?>
+
+
 	<script type="text/javascript">
+		let alert = document.getElementById("alert");
 		document.getElementById('shareBtn').addEventListener('click', () => {
 			navigator.clipboard.writeText("<?=SERVER_URL?>/attendence/teacher/class.php?id=<?=$class_id?>");
+
+
+			alert.classList.toggle("show");
+
+
 		});
 
 

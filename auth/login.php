@@ -23,6 +23,13 @@ function checkProfileExists($conn, $id, $type)
 
 }
 
+$accountCreated = false;
+
+if (isset($_SESSION['account_created'])) {
+	$accountCreated = true;
+	unset($_SESSION['account_created']); 
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
@@ -116,6 +123,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	<div class="container-l ">
 
 		<?php  require '../components/nav.php';?>
+		<?php if ($accountCreated): ?>
+			<div class="alert show" id="alert">
+				<img src="/attendence/img/check.png" alt="Check Mark">
+				<p class="f-r">Your account was created! Please log in.</p>
+			</div>
+		<?php endif; ?>
 
 		<form class="form d-f-col" action="login.php" method="POST">
 

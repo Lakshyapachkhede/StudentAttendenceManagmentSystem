@@ -16,6 +16,7 @@
   --color-red: 	#dc3545;
   --color-green-dark:#218838;
   --color-red-dark: #c82333;
+
 }
 
 
@@ -89,7 +90,12 @@ font-family: "Roboto", sans-serif;
 .tac{
 	text-align: center;
 }
-
+.m10{
+	margin: 10px !important;
+}
+.p10{
+	padding: 10px  !important;
+}
 .mb10{
 	margin-bottom: 10px !important;
 }.mb20{
@@ -199,6 +205,9 @@ font-family: "Roboto", sans-serif;
 
 .w-70{
 	width: 70%;
+}
+.w-100{
+	width: 100%;
 }
 .mw-80{
 	max-width: 80%;

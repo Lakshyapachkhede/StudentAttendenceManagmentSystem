@@ -74,6 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 			$stmt->close();
 			$conn->close();
+			session_start();
+			$_SESSION['account_created'] = true;
 
 			header("Location: login.php");
 			exit();
