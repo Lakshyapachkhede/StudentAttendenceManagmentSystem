@@ -18,7 +18,7 @@ $teacher_name = $conn->query("SELECT name from user WHERE id = $teacher_id")->fe
 
 
 
-$message = "Link Copied to Clipboard";
+$message = "Link Copied to Clipboard.";
 
 
 ?>
@@ -43,7 +43,7 @@ $message = "Link Copied to Clipboard";
 
 				<div class="d-f jc-sb  mb10 ai-c">
 					
-					<div class="d-f g-10">
+					<div class="d-f g-10 class-name-date">
 						<a class = "link"href="profile.php?id=<?=$teacher_id?>"><?= $teacher_name ?></a>
 						<p> <?php echo (new DateTime($class_data["date_created"]))->format('F j, Y'); ?></p>
 					</div>

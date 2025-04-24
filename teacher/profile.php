@@ -265,7 +265,7 @@ $stmt->close();
 
 				</div>
 
-				<form class="profile-right" method="post" accept="<?= $_SERVER['PHP_SELF'] ?>">
+				<form class="profile-right form-profile-update" method="post" accept="<?= $_SERVER['PHP_SELF'] ?>">
 					<h1 class="ml10">About</h1>
 					<input type="hidden" name="id" value="<?= $id ?>">
 					<table class="profile-table" style="width:100%;">

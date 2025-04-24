@@ -56,10 +56,10 @@
 
 
 .nav-right{
-/*	gap: 40px;*/
-font-weight: 700;
-font-size: 14px;
-position: relative;
+	/*	gap: 40px;*/
+	font-weight: 700;
+	font-size: 14px;
+	position: relative;
 }
 
 .nav-links{
@@ -219,7 +219,7 @@ position: relative;
 .admin-card-text{
 	font-size: 18px;
 	margin-top: 50px;
-/*	font-weight: 600;*/
+	/*	font-weight: 600;*/
 
 }
 
@@ -263,6 +263,7 @@ position: relative;
 	gap: 30px;
 	margin-top: 50px;
 	padding: 20px;
+	flex-direction: column;
 }
 
 .profile-left{
@@ -285,6 +286,7 @@ position: relative;
 .profile-left .profile-name{
 	color: white;
 	font-size: 24px;
+	text-align: center;
 }
 
 .profile-bio{
@@ -311,6 +313,7 @@ position: relative;
 
 .profile-table td{
 	padding: 10px;
+
 }
 
 .text-dark{
@@ -397,6 +400,7 @@ select {
 	transition: transform 0.4s ease, opacity 0.3s ease;
 	opacity: 0;
 	pointer-events: none;
+	max-width: 93vw;
 
 }
 
@@ -500,43 +504,84 @@ select {
 
 @media only screen and (max-width: 800px) {
 
-.nav-links-ul{
-	background: var(--color-background);
-	flex-direction:  column;
-	position: fixed;
-	top: 0;
-	right: 0;
+	.nav-links-ul{
+		background: var(--color-background);
+		flex-direction:  column;
+		position: fixed;
+		top: 0;
+		right: 0;
 		transform: translateX(100%);
-gap: 40px;
-height: 100vh;
-min-width: 250px;
-z-index: 20;
+		gap: 40px;
+		height: 100vh;
+		min-width: 250px;
+		z-index: 20;
 
-justify-content: start;
-padding: 20px;
-align-items: start;
-	transition: transform 0.4s ease, opacity 0.3s ease;
-	opacity: 0;
-	pointer-events: none;
+		justify-content: start;
+		padding: 20px;
+		align-items: start;
+		transition: transform 0.4s ease, opacity 0.3s ease;
+		opacity: 0;
+		pointer-events: none;
+	}
+	.nav-links-ul.show {
+		transform: translateX(0); 
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+
+	.nav-links{
+		margin: 0;
+	}
+
+	.nav-links-ul > :first-child {
+		margin-bottom: -20px; /* or whatever amount */
+	}
+	.nav-icon-hide{
+		display: initial;
+	}
+	.form-create-class{
+		width: 100%;
+	}
+
 }
-.nav-links-ul.show {
-	transform: translateX(0); 
-	opacity: 1;
-	pointer-events: auto;
+
+
+@media only screen and (max-width: 600px) {
+	.user-row{
+		flex-direction: column;
+		gap: 10px;
+		justify-content: initial;
+		align-items: initial;
+	}
+
+	.user-row-right{
+		justify-content: initial;
+	}
+	.container{
+		padding: 0 5px;
+	}
+	h1{
+		font-size: 1.4rem;
+	}
+	.class{
+		padding: 10px
+	}
+	.class-name-date{
+		flex-direction: column;
+		gap: 5px;
+	}
+	.form{
+		width: initial;
+		margin: 5px;
+	}
+
+	.f-input{
+		width: 100%
+	}
+	.form-profile-update td{
+		padding: 0px
+	}
+
+
 }
-
-
-.nav-links{
-	margin: 0;
-}
-
-.nav-links-ul > :first-child {
-  margin-bottom: -20px; /* or whatever amount */
-}
-.nav-icon-hide{
-	display: initial;
-}
-
-}
-
-

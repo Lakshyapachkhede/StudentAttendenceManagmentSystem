@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 	<div class="container mt40">
 		
-		<form class="form f-l d-f-col" action="create_class.php" method="POST">
+		<form class="form f-l d-f-col form-create-class" action="create_class.php" method="POST">
 
 			<h1 class="tac mb10">Create Class</h1>
 
