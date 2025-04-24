@@ -1,6 +1,6 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+	session_start();
 }
 ?>
 
@@ -13,19 +13,23 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 	<div class="nav-right d-fcc mr-10">
-		<ul class="nav-links-ul d-fcc ul-sn">
+
+		
+		<ul class="nav-links-ul d-fcc ul-sn" id="nav-ul">
 			<!-- <li><a href="" class="nav-links">classes</a></li> -->
+			<img src="/attendence/img/remove.png" alt="Close" class="icon-s nav-icon-hide" id="nav-close-btn">
+
 			<li><a href="/attendence/auth/logout.php" class="nav-links">log out</a></li>
 
 			<?php 
 			if ($_SESSION['type'] == "student") {
 
-			echo" <li><a href='/attendence/student/profile.php?id=" . $_SESSION['user_id']. "&action=view' class='nav-links'>profile</a></li>";		
-}
+				echo" <li><a href='/attendence/student/profile.php?id=" . $_SESSION['user_id']. "&action=view' class='nav-links'>profile</a></li>";		
+			}
 			else {
 				echo" <li><a href='/attendence/teacher/profile.php?id=" .$_SESSION['user_id']. "&action=view' class='nav-links'>profile</a></li>";	
 
-					echo "<li><a href='/attendence/teacher/create_class.php' class='btn'>Create Class</a></li>";
+				echo "<li><a href='/attendence/teacher/create_class.php' class='btn'>Create Class</a></li>";
 
 
 
@@ -35,15 +39,31 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 
-		?>
+			?>
 
 
 
 		</ul>
-		<ul class="nav-buttons-ul d-fcc ul-sn">
-
-		</ul>
+		<img src="/attendence/img/nav.png" alt="Close" class="icon-s nav-icon-hide"  id="nav-open-btn">
 	</div>
 
+	<script type="text/javascript">
+		
+		let nav = document.getElementById("nav-ul");
+		let closeBtn = document.getElementById("nav-close-btn");
+		let openBtn = document.getElementById("nav-open-btn");
+
+		closeBtn.addEventListener("click", ()=>{
+			nav.classList.toggle("show");
+
+		});	
+
+		openBtn.addEventListener("click", ()=>{
+			nav.classList.toggle("show");
+
+		});
+
+
+	</script>
 
 </nav>

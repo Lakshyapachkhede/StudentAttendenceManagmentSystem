@@ -102,8 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 </head>
 <body>
 	
-
 	<?php require '..\components\nav_sm.php'; ?>
+
 
 	<div class="notification-con" id="notification-con">
 		
@@ -160,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 			<div class="icon-wrapper">
 				<span class="icon-num"><?= $notifications ?></span>
-				<img src="/attendence/img/notification.png" alt="notifications" class="icon" id="notification-btn">
+				<img src="/attendence/img/notification.png" alt="notifications" class="icon " id="notification-btn">
 			</div>
 
 
