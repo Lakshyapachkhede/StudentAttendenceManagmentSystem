@@ -66,9 +66,13 @@ function getTotalUsers($conn, $type)
 	return $count;
 }
 
+require '../utils.php';
+
+
+
 $numStudent = getTotalUsers($conn, "student");
 $numTeacher = getTotalUsers($conn, "teacher");
-
+$numClasses = getNumberOfRecords($conn, "class");
 
 
 ?>
@@ -88,7 +92,7 @@ $numTeacher = getTotalUsers($conn, "teacher");
 
 	<div class="container-l">
 
-		<div class="d-fcc jc-sb">
+		<div class="d-fcc jc-sb admin-cards">
 
 			<div class="admin-card">
 				<p class="admin-card-num"data-target="<?php echo $numStudent; ?>">0</p>
@@ -104,7 +108,7 @@ $numTeacher = getTotalUsers($conn, "teacher");
 			</div>		
 
 			<div class="admin-card">
-				<p class="admin-card-num" data-target="94">0</p>
+				<p class="admin-card-num" data-target="<?=$numClasses?>">0</p>
 
 				<p class="admin-card-text">Total Classes</p>
 			</div>		
@@ -162,6 +166,7 @@ $numTeacher = getTotalUsers($conn, "teacher");
 		</div>
 	</div>
 
+	<?php require '../components/alert.php';?>
 
 	<script>
 

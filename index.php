@@ -78,7 +78,7 @@ if (isset($_SESSION['login'])){
 	<br>
 	<br>
 	<div class="label">
-		<p>Experience Effortless Attendence Management with SAM System  <a href="auth/signup.php" class="btn-l ml20">Sign Up For Free</a></p>
+		<p>Experience Effortless Attendence Management with SAM System  </p><a href="auth/signup.php" class="btn-l ml20">Sign Up For Free</a>
 
 	</div>
 

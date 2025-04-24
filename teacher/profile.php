@@ -216,7 +216,7 @@ $stmt->close();
 
 					<?php 
 					if ($_SESSION["user_id"] == $user_data['id']){
-						echo "<a href='/attendence/teacher/profile.php?id=" .  $_SESSION['user_id'] . "&action=update' class='btn mt20'>Update Profile</a>	";
+						echo "<a href='/attendence/teacher/profile.php?id=" .  $_SESSION['user_id'] . "&action=update' class='profile-update-icon'><img src='/attendence/img/edit.png'  class='icon'></a>	";
 					}
 
 					?>

@@ -15,7 +15,7 @@ if (session_status() === PHP_SESSION_NONE) {
 	<div class="nav-right d-fcc mr-10">
 
 		
-		<ul class="nav-links-ul d-fcc ul-sn" id="nav-ul">
+		<ul class="nav-links-ul side-bar d-fcc ul-sn" id="side-bar">
 			<!-- <li><a href="" class="nav-links">classes</a></li> -->
 			<img src="/attendence/img/remove.png" alt="Close" class="icon-s nav-icon-hide" id="nav-close-btn">
 
@@ -26,13 +26,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
 				echo" <li><a href='/attendence/student/profile.php?id=" . $_SESSION['user_id']. "&action=view' class='nav-links'>profile</a></li>";		
 			}
-			else {
+			else if ($_SESSION['type'] == "teacher") {
 				echo" <li><a href='/attendence/teacher/profile.php?id=" .$_SESSION['user_id']. "&action=view' class='nav-links'>profile</a></li>";	
 
 				echo "<li><a href='/attendence/teacher/create_class.php' class='btn'>Create Class</a></li>";
-
-
-
+			} else { // for admin
 
 			}
 
@@ -49,7 +47,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 	<script type="text/javascript">
 		
-		let nav = document.getElementById("nav-ul");
+		let nav = document.getElementById("side-bar");
 		let closeBtn = document.getElementById("nav-close-btn");
 		let openBtn = document.getElementById("nav-open-btn");
 

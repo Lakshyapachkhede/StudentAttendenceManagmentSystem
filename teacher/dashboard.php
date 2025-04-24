@@ -1,6 +1,7 @@
 <?php
 require '../db/db_connector.php';
 require '../session.php';
+require '../utils.php';
 requireType("teacher");
 
 $notifications = 0;
@@ -22,14 +23,7 @@ function getBranchName($id, $conn)
 	}
 }
 
-function getAttribute($conn, $table, $attribute, $parameter ,$id){
-	$stmt = $conn->prepare("SELECT $attribute FROM $table WHERE $parameter = ?");
-	$stmt->bind_param('i', $id);
-	$stmt->execute();
-	$result = $stmt->get_result()->fetch_assoc()[$attribute] ?? null;
-	return $result;
 
-}
 
 function approveJoinRequest($conn, $student_id, $class_id){
 	$stmt = $conn->prepare("DELETE FROM join_requests  WHERE student_id = ? AND class_id = ?");
