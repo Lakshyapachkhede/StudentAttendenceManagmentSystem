@@ -601,7 +601,12 @@ select {
 	margin-top: 20px;
 	display: block;
 }
-
+.alert{
+	width: 93vw;
+}
+.short-col{
+	flex-direction: column;
+}
 }
 
 

@@ -133,6 +133,7 @@ $numClasses = getNumberOfRecords($conn, "class");
 			if ($result->num_rows > 0){
 				echo "<h1 class='mb20'>New User Approval Requests</h1>";
 			}
+
 			while ($row = $result->fetch_assoc()) {
 				$user_id = $row['user_id'];
 				$user = $conn->query("SELECT id,name, date_created, type FROM user WHERE id = $user_id ")->fetch_assoc();

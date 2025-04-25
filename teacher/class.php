@@ -1,6 +1,8 @@
 <?php
 require '../db/db_connector.php';
 require '../session.php';
+require '../utils.php';
+
 
 $class_id = $_GET['id'];
 
@@ -71,13 +73,59 @@ $message = "Link Copied to Clipboard.";
 
 		</div>
 
+		<div class="class-data mt40">
+			
+
+			<?php
+
+
+			if (isLoggedInUser($teacher_id)){
+
+
+
+				$result =getRecords($conn, "attends", "class_id", $class_id);
+
+				if ($result->num_rows > 0){
+					echo "<div class='d-fcc jc-sb short-col'><h1 class='mb20'>Students - " . $class_data['name'] . "</h1><a class='link td-u mr20' href='class_students.php?id=$class_id'>all students</a></div>";
+				} else {
+					echo "<h1 class='mb20'>No students in " . $class_data['name'] . "</h1>";
+
+				}
+				$count = 0;
+
+				while (($row = $result->fetch_assoc() ) && $count < 5) {
+					$count++;
+					$user_id = $row['student_id'];
+					$user_data = getRecords($conn, "user", "id", $user_id)->fetch_assoc();
+					$user_profile_data = getRecords($conn, "student_profile", "student_id", $user_id)->fetch_assoc();
+
+
+
+					echo"<div class='user-row'>
+					<div class='user-row-left'>
+					<a class='user-row-name td-u' href='/attendence/" . $user_data['type']. "/profile.php?id=". $user_data['id'] . "&action=view'>" . $user_data['name'] . "</a>
+					<p>". $user_profile_data['roll_no'] ."</p>
+					<p class='user-row-date'>Joined: ".  getFormattedDate($row['date_joined']). " </p>
+
+					</div>
+
+					<div class='user-row-right'>
+
+					</div>
+
+					</div>";
+				}
+
+			}
+
+			?>
+
+
+
+
+
+		</div>
 	</div>
-
-
-
-
-
-
 
 
 	<div class="alert" id="alert">

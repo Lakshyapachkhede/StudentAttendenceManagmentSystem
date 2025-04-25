@@ -118,7 +118,10 @@ a{
 }
 
 .mr10{
-	margin-right: 10px;
+	margin-right: 10px !important;
+}
+.mr20{
+	margin-right: 20px !important;
 }
 
 .t-warn{
@@ -190,7 +193,7 @@ a{
 }
 
 .td-u{
-	text-decoration: underline;
+	text-decoration: underline !important;
 }
 .z-index0{
 	z-index: 0;

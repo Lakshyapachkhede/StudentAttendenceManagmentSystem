@@ -20,9 +20,11 @@ session_destroy();
 
 </head>
 <body>
+	<?php  require '../components/nav.php';?>
+
 	<div class="container-l">
-			<h1>You have been Logged out!</h1>
-					<p class="p-sm">click here to <a href="login.php" class="link-sm">log in</a> again</p>
+		<h1>You have been Logged out!</h1>
+		<p class="p-sm">click here to <a href="login.php" class="link-sm">log in</a> again</p>
 
 	</div>
 
