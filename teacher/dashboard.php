@@ -109,6 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 		$stmt->execute();
 		$result = $stmt->get_result();
 		$notifications += $result->num_rows;
+
+		if ($result->num_rows == 0){
+			echo "<p class='text-dark' style='align-self:center;'>No new notifications.</p>";
+		}
+
 		while($row = $result->fetch_assoc()){
 
 
@@ -153,7 +158,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 			<h1>Welcome <?= $_SESSION['name']?></h1>
 
 			<div class="icon-wrapper">
-				<span class="icon-num"><?= $notifications ?></span>
+				<?php if ($notifications > 0): ?>
+					<span class="icon-num"><?= $notifications ?></span>
+				<?php endif ?>
 				<img src="/attendence/img/notification.png" alt="notifications" class="icon " id="notification-btn">
 			</div>
 
@@ -178,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 			<a class='btn' href='class.php?id=".  $row["id"] ." '>View</a>
 
 
-			<a class='btn btn-s' >Attendence</a>
+			<a class='btn btn-s' href='take_attendence.php?id=".  $row["id"] ." '>Attendence</a>
 			</div>
 
 			</div>";

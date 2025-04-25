@@ -123,7 +123,11 @@ a{
 .mr20{
 	margin-right: 20px !important;
 }
-
+.ml40{
+	margin-left: 40px !important;
+}.ml20{
+	margin-left: 20px !important;
+}
 .t-warn{
 	color: var(--color-accent);
 }
@@ -234,4 +238,8 @@ a{
 
 .ai-c{
 	align-items: center;
+}
+
+.w-i{
+	width: initial !important;
 }

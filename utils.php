@@ -1,6 +1,9 @@
 <?php
 
 require 'db/db_connector.php';
+date_default_timezone_set('Asia/Kolkata');
+
+
 
 function getAttribute($conn, $table, $attribute, $parameter ,$value){
 	$stmt = $conn->prepare("SELECT $attribute FROM $table WHERE $parameter = ?");
@@ -34,7 +37,30 @@ function getFormattedDate($str){
 	return (new DateTime($str))->format('F j, Y');
 }
 
+function insertAttendenceRecord($conn, $session_id, $student_id, $status)
+{
+	$stmt = $conn->prepare("INSERT INTO attendence VALUES(?, ?, ?)");
+	$stmt->bind_param("iis", $session_id, $student_id, $status);
+	if ($stmt->execute()){
+		return true;
+	} else {
+		return false;
+	}
 
+}
+
+
+function createAttendenceSession($conn, $class_id, $datetime){
+	$stmt = $conn->prepare("INSERT INTO attendence_session(class_id, date_time) VALUES(?, ?)");
+	$stmt->bind_param("is", $class_id, $datetime);
+
+	if ($stmt->execute()){
+		return $conn->insert_id;
+	} else{
+		return null;
+	}
+
+}
 
 
 ?>
