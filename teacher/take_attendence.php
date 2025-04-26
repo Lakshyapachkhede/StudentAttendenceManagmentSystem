@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 							<tr>
 							<td>" . $user_data['name'] . "</td>
 							<td>". $user_profile_data['roll_no'] ."</td>
-							<td><input type='checkbox' name='present[]' value='".$user_data['id']."'></td>
+							<td class='tac'><input type='checkbox' name='present[]' value='".$user_data['id']."'></td>
 							</tr>
 							<input type='hidden' name='all_students[]' value='".$user_data['id']."'>
 							";
