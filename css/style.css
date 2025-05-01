@@ -674,6 +674,21 @@ select {
 
 
 @media only screen and (max-width: 600px) {
+.record-date-filter{
+	flex-direction: column;
+	    width: 100%;
+    padding: 0 20px;
+}
+.record-date-filter-row{
+	width: 100%;
+	justify-content: space-between;
+}
+
+.record-date-filter button:last-child{
+	align-self: end;
+	margin: 5px 10px;
+}
+
 	.user-row{
 		flex-direction: column;
 		gap: 10px;

@@ -182,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 			</div>
 
 			<div class='user-row-right'>
-			<a class='btn' href='class.php?id=".  $row["id"] ." '>View</a>
+			<a class='btn' href='class_report.php?id=".  $row["id"] ." '>Record</a>
 
 
 			<a class='btn btn-s' href='take_attendence.php?id=".  $row["id"] ." '>Attendence</a>

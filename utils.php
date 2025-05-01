@@ -37,6 +37,14 @@ function getFormattedDate($str){
 	return (new DateTime($str))->format('F j, Y');
 }
 
+function parseHtmlInputDate($str){
+	return str_replace('T', ' ', $_POST['attendence_time']);
+}
+
+function getHtmlInputDate($str){
+	return (new DateTime($str))->format('Y-m-d\TH:i');
+}
+
 function insertAttendenceRecord($conn, $session_id, $student_id, $status)
 {
 	$stmt = $conn->prepare("INSERT INTO attendence VALUES(?, ?, ?)");
@@ -60,6 +68,13 @@ function createAttendenceSession($conn, $class_id, $datetime){
 		return null;
 	}
 
+}
+
+function executeSql($conn, $sql){
+	$stmt = $conn->prepare($sql);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	return $result;
 }
 
 
