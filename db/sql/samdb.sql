@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3307:3307
--- Generation Time: Apr 26, 2025 at 06:27 AM
+-- Host: 127.0.0.1:3307
+-- Generation Time: May 08, 2025 at 08:31 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,21 +38,24 @@ CREATE TABLE `attendence` (
 --
 
 INSERT INTO `attendence` (`session_id`, `student_id`, `status`) VALUES
-(11, 7, 'present'),
-(11, 8, 'present'),
+(11, 7, 'absent'),
+(11, 8, 'absent'),
 (11, 11, 'present'),
 (11, 13, 'present'),
-(11, 14, 'absent'),
+(11, 14, 'present'),
+(11, 15, 'present'),
 (12, 7, 'absent'),
 (12, 8, 'present'),
 (12, 11, 'absent'),
 (12, 13, 'present'),
 (12, 14, 'absent'),
+(12, 15, 'absent'),
 (13, 7, 'present'),
-(13, 8, 'absent'),
+(13, 8, 'present'),
 (13, 11, 'present'),
 (13, 13, 'absent'),
 (13, 14, 'present'),
+(13, 15, 'present'),
 (14, 7, 'present'),
 (14, 8, 'present'),
 (14, 11, 'present'),
@@ -60,9 +63,49 @@ INSERT INTO `attendence` (`session_id`, `student_id`, `status`) VALUES
 (14, 14, 'present'),
 (15, 7, 'present'),
 (15, 8, 'present'),
-(15, 11, 'absent'),
-(15, 13, 'absent'),
-(15, 14, 'present');
+(15, 11, 'present'),
+(15, 13, 'present'),
+(15, 14, 'present'),
+(15, 15, 'present'),
+(16, 7, 'present'),
+(16, 8, 'absent'),
+(16, 11, 'present'),
+(16, 13, 'absent'),
+(16, 14, 'absent'),
+(16, 15, 'present'),
+(17, 7, 'absent'),
+(17, 8, 'present'),
+(17, 11, 'present'),
+(17, 13, 'absent'),
+(17, 14, 'present'),
+(17, 15, 'absent'),
+(18, 7, 'present'),
+(18, 8, 'absent'),
+(18, 11, 'absent'),
+(18, 13, 'present'),
+(18, 14, 'absent'),
+(18, 15, 'present'),
+(19, 7, 'present'),
+(19, 8, 'absent'),
+(19, 11, 'present'),
+(19, 13, 'absent'),
+(19, 14, 'absent'),
+(19, 15, 'present'),
+(20, 7, 'present'),
+(20, 8, 'absent'),
+(20, 11, 'present'),
+(20, 13, 'present'),
+(20, 14, 'absent'),
+(20, 15, 'present'),
+(21, 7, 'present'),
+(21, 8, 'present'),
+(21, 11, 'absent'),
+(22, 7, 'absent'),
+(22, 8, 'present'),
+(22, 11, 'present'),
+(23, 7, 'absent'),
+(23, 8, 'present'),
+(23, 11, 'absent');
 
 -- --------------------------------------------------------
 
@@ -85,7 +128,15 @@ INSERT INTO `attendence_session` (`id`, `class_id`, `date_time`) VALUES
 (12, 3, '2025-04-27 09:31:00'),
 (13, 3, '2025-04-28 09:31:00'),
 (14, 3, '2025-04-28 09:31:00'),
-(15, 3, '2025-04-30 09:31:00');
+(15, 3, '2025-04-30 09:31:00'),
+(16, 3, '2025-05-08 11:04:00'),
+(17, 3, '2025-05-08 11:56:00'),
+(18, 3, '2025-05-08 11:57:00'),
+(19, 3, '2025-05-08 11:57:00'),
+(20, 3, '2025-05-08 11:57:00'),
+(21, 5, '2025-05-08 11:59:00'),
+(22, 5, '2025-05-09 11:59:00'),
+(23, 5, '2025-05-10 11:59:00');
 
 -- --------------------------------------------------------
 
@@ -112,7 +163,8 @@ INSERT INTO `attends` (`student_id`, `class_id`, `date_joined`) VALUES
 (11, 4, '2025-04-24 15:26:40'),
 (11, 5, '2025-04-25 09:23:55'),
 (13, 3, '2025-04-25 22:32:48'),
-(14, 3, '2025-04-26 08:27:27');
+(14, 3, '2025-04-26 08:27:27'),
+(15, 3, '2025-05-08 11:04:00');
 
 -- --------------------------------------------------------
 
@@ -200,7 +252,8 @@ INSERT INTO `signuprequests` (`id`, `user_id`, `status`, `date`) VALUES
 (7, 12, 'declined', '2025-04-25'),
 (8, 12, 'approved', '2025-04-25'),
 (9, 13, 'pending', '2025-04-25'),
-(10, 14, 'pending', '2025-04-26');
+(10, 14, 'pending', '2025-04-26'),
+(11, 15, 'pending', '2025-05-08');
 
 -- --------------------------------------------------------
 
@@ -224,7 +277,8 @@ INSERT INTO `student_profile` (`student_id`, `roll_no`, `branch`, `bio`) VALUES
 (8, '23031C04053', 1, 'I am cool.'),
 (11, '23031C04012', 1, 'rcb lover'),
 (13, '23031C04028', 1, 'I am harsh rathoud'),
-(14, '23031C04048', 1, 'I am kanha');
+(14, '23031C04048', 1, 'I am kanha'),
+(15, '23031C040323', 1, 'i am cool');
 
 -- --------------------------------------------------------
 
@@ -275,7 +329,8 @@ INSERT INTO `user` (`id`, `name`, `email`, `password`, `type`, `approved`, `date
 (11, 'Anuj Verma', 'anujverma@gmail.com', '$2y$10$NzbXHhebCjDj06ABhCoP8uVMTIm9YhQGeJFMhShFW2Fx7l2pRS8wm', 'student', 1, '2025-04-24'),
 (12, 'P.L. Bansal', 'plbansal@gmail.com', '$2y$10$SHHptYNX8S.5tzaiuh7Dv.zGM2XDPZqjLJJaXBZmN5EIdWsq.Rbde', 'teacher', 1, '2025-04-25'),
 (13, 'Harshvardhan Singh Rathoud', 'harsh@gmail.com', '$2y$10$ZoCZdEb379KND0GsUTqQQ.whKdmZ6cSB7I6eFAu.ZOqV7QJqYhEyy', 'student', 0, '2025-04-25'),
-(14, 'Kanha chaturvedi', 'kanha@gmail.com', '$2y$10$JBfRbeNDzkmjxMhFtEQr6.f755Eu9AVtBlMKbhjLsoz5kTsSEOkv2', 'student', 0, '2025-04-26');
+(14, 'Kanha chaturvedi', 'kanha@gmail.com', '$2y$10$JBfRbeNDzkmjxMhFtEQr6.f755Eu9AVtBlMKbhjLsoz5kTsSEOkv2', 'student', 0, '2025-04-26'),
+(15, 'Shivansh Pandey', 'shivansh@gmail.com', '$2y$10$u4x/5owLS7bpimwvMTZVr.TKoLK1BWGg97xW/tI77opwPIxcXc7N2', 'student', 0, '2025-05-08');
 
 --
 -- Indexes for dumped tables
@@ -361,7 +416,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `attendence_session`
 --
 ALTER TABLE `attendence_session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `branch`
@@ -379,13 +434,13 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `signuprequests`
 --
 ALTER TABLE `signuprequests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
