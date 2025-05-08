@@ -215,16 +215,24 @@ function downloadPdf($conn, $class_id) {
 							$stmt->execute();
 							$result = $stmt->get_result();
 							$r = $result->fetch_assoc();
+
+
+
 							if ($r == null){
-								echo "-";
+								echo "<input type='checkbox' class='attendence-checkbox' data-session-id=" . $sess['id'] ." data-student-id=". $user_id . ">";
 
 							}
+
+
+
 							else if ($r['status'] === 'present'){
-								echo "<img src='/attendence/img/check.png' alt='' class='icon p0' >";
-							} else if ($r['status'] === 'absent'){
-								echo "<img src='/attendence/img/remove.png' alt='' class='icon p0' >";
-							} else {
-								echo "-";
+								echo "<input type='checkbox' class='attendence-checkbox' data-session-id=" . $sess['id'] ." data-student-id=". $user_id . " checked>";
+							}
+
+
+
+							else if ($r['status'] === 'absent'){
+								echo "<input type='checkbox' class='attendence-checkbox' data-session-id=" . $sess['id'] ." data-student-id=". $user_id . ">";
 							}
 
 							echo "</td>";
@@ -283,7 +291,43 @@ function downloadPdf($conn, $class_id) {
 			}
 		});
 	</script>
-	-->
+-->
+
+<script type="text/javascript">
+
+	document.querySelectorAll(".attendence-checkbox").forEach(checkbox => {
+		checkbox.addEventListener("change", function(){
+
+			const status = this.checked ? "present" : "absent";
+			const session_id = this.dataset.sessionId;
+			const student_id = this.dataset.studentId;
+
+			fetch("update_attendence_api.php", {
+				method:'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: `session_id=${session_id}&student_id=${student_id}&status=${status}`
+			})
+			.then(response => response.json())
+
+			.then(data => {
+				console.log(`Updated attendance for student ${student_id}:`, data);
+			}).catch(error => {
+				console.error('Error updating attendance:', error);
+			});
+
+
+		});
+
+	});
+
+
+</script>
+
+
+
+
 
 
 </body>
