@@ -119,38 +119,22 @@ function downloadPdf($conn, $class_id) {
 	<title>Class Data -  <?=getAttribute($conn, "class", "name", "id", $class_id)?> SAM</title>
 	<link rel="stylesheet" href="../css/util.css">
 	<link rel="stylesheet" href="../css/style.css">
-	<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 	
 	<?php require '..\components\nav_sm.php'; ?>
 
 	<div class="container d-f-col mt20">
-		<!-- <canvas id="myLineChart" width="800" height="400"></canvas> -->
 
 
-		<form class="d-fcc jc-sb record-date-filter" method="GET" action="class_report.php">
-			<input type="hidden" name="id" value="<?=$class_id?>">
-
-			<div class="d-fcc record-date-filter-row">
-				<h2 class="text-dark">From</h2>
-				<input type="datetime-local"  class="ml10 f-input w-i" name="start_date" value="<?php if (isset($start_date)) {echo $_GET['start_date'];} else {echo "$min_session_date";}?>" min='<?=$min_session_date?>' max='<?=$max_session_date?>'>
-			</div>	
-
-
-			<div class="d-fcc record-date-filter-row">
-				<h2 class="text-dark">To</h2>
-				<input type="datetime-local"  class="ml10 f-input w-i" name="end_date" min='<?=$min_session_date?>' max='<?=$max_session_date?>' value="<?php if (isset($end_date)) {echo $_GET['end_date'];} else {echo "$max_session_date";}?>">
-			</div>
-
-			<button class="btn" type="submit">Done</button>
-
-
-		</form>
+		
 
 		<?php if ($error != ""){
 			echo "<p class='mb10 mt20 t-warn'>$error</p>";
 		}?>
+
+		<h1 >Class Report - <?= getAttribute($conn, "class", "name", "id", $class_id) ?></h1>
 
 		<div class="scroll-wrapper">
 
@@ -250,10 +234,35 @@ function downloadPdf($conn, $class_id) {
 
 				</tbody>
 			</table>
+
+
+
+
+
 		</div>
+		<form class="d-fcc jc-sb record-date-filter" method="GET" action="class_report.php">
+			<input type="hidden" name="id" value="<?=$class_id?>">
+
+			<div class="d-fcc record-date-filter-row">
+				<h2 class="text-dark">From</h2>
+				<input type="datetime-local"  class="ml10 f-input w-i" name="start_date" value="<?php if (isset($start_date)) {echo $_GET['start_date'];} else {echo "$min_session_date";}?>" min='<?=$min_session_date?>' max='<?=$max_session_date?>'>
+			</div>	
 
 
+			<div class="d-fcc record-date-filter-row">
+				<h2 class="text-dark">To</h2>
+				<input type="datetime-local"  class="ml10 f-input w-i" name="end_date" min='<?=$min_session_date?>' max='<?=$max_session_date?>' value="<?php if (isset($end_date)) {echo $_GET['end_date'];} else {echo "$max_session_date";}?>">
+			</div>
 
+			<button class="btn" type="submit">Done</button>
+
+
+		</form>
+
+		<h1 class="mt40">Attendance Chart</h1>
+
+
+		<canvas id="attendenceChart" width="800" height="400"></canvas>
 	</div>
 
 	<?php require '../components/alert.php';?>
@@ -261,69 +270,91 @@ function downloadPdf($conn, $class_id) {
 
 
 
-	<!-- <script>
-		const ctx = document.getElementById('myLineChart').getContext('2d');
-		const myLineChart = new Chart(ctx, {
+	<script>
+		const ctx = document.getElementById('attendenceChart').getContext('2d');
+		const attendenceChart = new Chart(ctx, {
 			type: 'line',
 			data: {
-				labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+				labels: [
+					<?php
+					foreach($sessions_array  as $sess ){
+						echo " ' ". date('d-m-y', strtotime($sess['date_time'])) ." ',";
+					}
+
+					
+					?>
+
+
+				],
 				datasets: [{
-					label: 'Sales',
-					data: [65, 59, 80, 81, 56, 75],
+					label: 'Present',
+					data: [
+
+
+						<?php
+						foreach($sessions_array  as $sess ){
+							echo getNumberOfRecords($conn, "attendence WHERE session_id =". $sess['id'] ." AND status='present'") .",";
+						}
+
+
+						?>
+
+
+					],
 					fill: false,
 					borderColor: 'rgb(75, 192, 192)',
 					tension: 0.1
 				}]
 			},
 			options: {
-				responsive: false,
+				responsive: true,
+
 				plugins: {
-					title: {
-						display: true,
-						text: 'Monthly Sales Data'
-					}
+					
 				},
 				scales: {
 					y: {
-						beginAtZero: true
+						beginAtZero: true,
+						min: 0,
+						max: 1 + <?php echo getNumberOfRecords($conn, "attends WHERE class_id = $class_id") ?>
 					}
 				}
 			}
 		});
 	</script>
--->
 
-<script type="text/javascript">
 
-	document.querySelectorAll(".attendence-checkbox").forEach(checkbox => {
-		checkbox.addEventListener("change", function(){
+	<script type="text/javascript">
 
-			const status = this.checked ? "present" : "absent";
-			const session_id = this.dataset.sessionId;
-			const student_id = this.dataset.studentId;
+		document.querySelectorAll(".attendence-checkbox").forEach(checkbox => {
+			checkbox.addEventListener("change", function(){
 
-			fetch("update_attendence_api.php", {
-				method:'POST',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-				body: `session_id=${session_id}&student_id=${student_id}&status=${status}`
-			})
-			.then(response => response.json())
+				const status = this.checked ? "present" : "absent";
+				const session_id = this.dataset.sessionId;
+				const student_id = this.dataset.studentId;
 
-			.then(data => {
-				console.log(`Updated attendance for student ${student_id}:`, data);
-			}).catch(error => {
-				console.error('Error updating attendance:', error);
+				fetch("update_attendence_api.php", {
+					method:'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					body: `session_id=${session_id}&student_id=${student_id}&status=${status}`
+				})
+				.then(response => response.json())
+
+				.then(data => {
+					console.log(`Updated attendance for student ${student_id}:`, data);
+				}).catch(error => {
+					console.error('Error updating attendance:', error);
+				});
+
+
 			});
-
 
 		});
 
-	});
 
-
-</script>
+	</script>
 
 
 

@@ -79,50 +79,51 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 					<h2 class="text-dark"><?=$class_data['name']?></h2>
 					<input type="datetime-local" id="attendence_time" class="ml10 f-input w-i" name="attendence_time" value="<?=date('Y-m-d\TH:i')?>">
 				</div>
+				<div class="scroll-wrapper">
 
-				<table class="styled-table">
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Roll No</th>
-							<th>Mark</th>
-						</tr>
-					</thead>
-					<tbody>
-
-
-						<?php
-
-
-						$all_students = getRecords($conn, "attends", "class_id", $class_id);
-
-						while($row = $all_students->fetch_assoc()){
-							$user_id = $row['student_id'];
-							$user_data = getRecords($conn, "user", "id", $user_id)->fetch_assoc();
-							$user_profile_data = getRecords($conn, "student_profile", "student_id", $user_id)->fetch_assoc();
-
-
-
-
-							echo"
+					<table class="styled-table">
+						<thead>
 							<tr>
-							<td>" . $user_data['name'] . "</td>
-							<td>". $user_profile_data['roll_no'] ."</td>
-							<td class='tac'><input type='checkbox' name='present[]' value='".$user_data['id']."'></td>
+								<th>Name</th>
+								<th>Roll No</th>
+								<th>Mark</th>
 							</tr>
-							<input type='hidden' name='all_students[]' value='".$user_data['id']."'>
-							";
-						}
+						</thead>
+						<tbody>
+
+
+							<?php
+
+
+							$all_students = getRecords($conn, "attends", "class_id", $class_id);
+
+							while($row = $all_students->fetch_assoc()){
+								$user_id = $row['student_id'];
+								$user_data = getRecords($conn, "user", "id", $user_id)->fetch_assoc();
+								$user_profile_data = getRecords($conn, "student_profile", "student_id", $user_id)->fetch_assoc();
 
 
 
-						?>
+
+								echo"
+								<tr>
+								<td>" . $user_data['name'] . "</td>
+								<td>". $user_profile_data['roll_no'] ."</td>
+								<td class='tac'><input type='checkbox' name='present[]' value='".$user_data['id']."'></td>
+								</tr>
+								<input type='hidden' name='all_students[]' value='".$user_data['id']."'>
+								";
+							}
 
 
 
-					</tbody>
-				</table>
+							?>
 
+
+
+						</tbody>
+					</table>
+				</div>
 				<button class="btn btn-form" type="submit">Done</button>
 
 			</div>

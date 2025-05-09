@@ -6,40 +6,43 @@
 	box-sizing: border-box;
 
 }
-
-.link{
-	color: var(--color-primary-light);
-	text-decoration: none;
-
+h1{
+	color: var(--color-text-dark);
+	font-weight: 700;
 }
-.link:hover{
-	text-decoration: underline;
-}
+	.link{
+		color: var(--color-primary-light);
+		text-decoration: none;
+
+	}
+	.link:hover{
+		text-decoration: underline;
+	}
 
 
-.navbar{
-	justify-content: space-between;
-	padding: 20px;
-	position: fixed;
-	top: 0;
-	z-index: 1; 
-	left: 50%;
-	transform: translateX(-50%);
-	width: 100%;
-	background: white;
+	.navbar{
+		justify-content: space-between;
+		padding: 20px;
+		position: fixed;
+		top: 0;
+		z-index: 1; 
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100%;
+		background: white;
 
 
-}
+	}
 
-.nav-left{
-	gap: 10px;
-}
-.nav-left img{
-	width: 40px;
-}
-.nav-left p {
-	font-size: 1.5rem;
-	font-weight: bold;
+	.nav-left{
+		gap: 10px;
+	}
+	.nav-left img{
+		width: 40px;
+	}
+	.nav-left p {
+		font-size: 1.5rem;
+		font-weight: bold;
 /*  background: linear-gradient(45deg, #ff6ec4, #7873f5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;*/
@@ -674,20 +677,20 @@ select {
 
 
 @media only screen and (max-width: 600px) {
-.record-date-filter{
-	flex-direction: column;
-	    width: 100%;
-    padding: 0 20px;
-}
-.record-date-filter-row{
-	width: 100%;
-	justify-content: space-between;
-}
+	.record-date-filter{
+		flex-direction: column;
+		width: 100%;
+		padding: 0 20px;
+	}
+	.record-date-filter-row{
+		width: 100%;
+		justify-content: space-between;
+	}
 
-.record-date-filter button:last-child{
-	align-self: end;
-	margin: 5px 10px;
-}
+	.record-date-filter button:last-child{
+		align-self: end;
+		margin: 5px 10px;
+	}
 
 	.user-row{
 		flex-direction: column;
@@ -751,6 +754,6 @@ select {
 
 
 canvas{
-  width:100% !important;
-  height:40% !important;
+	width:100% !important;
+	height:40% !important;
 }
