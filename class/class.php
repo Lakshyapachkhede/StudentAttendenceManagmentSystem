@@ -46,14 +46,14 @@ $message = "Link Copied to Clipboard.";
 				<div class="d-f jc-sb  mb10 ai-c">
 					
 					<div class="d-f g-10 class-name-date">
-						<a class = "link"href="profile.php?id=<?=$teacher_id?>"><?= $teacher_name ?></a>
+						<a class = "link"href="/attendence/teacher/profile.php?id=<?=$teacher_id?>"><?= $teacher_name ?></a>
 						<p> <?php echo (new DateTime($class_data["date_created"]))->format('F j, Y'); ?></p>
 					</div>
 
 					<?php if ($_SESSION['type'] == "teacher"):?>
 						<img src="/attendence/img/copy.png"  class="icon" id="shareBtn">
 					<?php else: ?>	
-						<a class="btn" href="/attendence/student/join_class.php?id=<?=$class_id?>">Join</a>
+						<a class="btn" href="/attendence/class/join_class.php?id=<?=$class_id?>">Join</a>
 
 
 					<?php endif; ?>
@@ -139,7 +139,7 @@ $message = "Link Copied to Clipboard.";
 	<script type="text/javascript">
 		let alert = document.getElementById("alert");
 		document.getElementById('shareBtn').addEventListener('click', () => {
-			navigator.clipboard.writeText("<?=SERVER_URL?>/attendence/teacher/class.php?id=<?=$class_id?>");
+			navigator.clipboard.writeText("<?=SERVER_URL?>/attendence/class/class.php?id=<?=$class_id?>");
 
 
 			alert.classList.toggle("show");

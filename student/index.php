@@ -49,7 +49,7 @@ function getAttribute($conn, $table, $attribute, $parameter ,$id){
 		while($row = $result->fetch_assoc()){
 			echo "<div class='user-row'>
 			<div class='user-row-left'>
-			<a class='link td-u' href='/attendence/student/class.php?id=". $row['class_id']. " '>" . getAttribute($conn, "class", "name","id", $row['class_id']) . "</a>
+			<a class='link td-u' href='/attendence/class/class.php?id=". $row['class_id']. " '>" . getAttribute($conn, "class", "name","id", $row['class_id']) . "</a>
 			<p>Joined: ".   (new DateTime($row["date_joined"]))->format('F j, Y') . "</p>
 
 			<p>Branch: " . getAttribute($conn, "branch", "full_name","id", getAttribute($conn, "class", "branch","id", $row['class_id'])) . "</p>

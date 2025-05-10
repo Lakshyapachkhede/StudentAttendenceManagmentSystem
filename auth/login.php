@@ -59,13 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 			switch ($_SESSION['type']) {
 				case 'admin':
-				header("Location: /attendence/admin/dashboard.php");
+				header("Location: /attendence/admin/");
 				break;
 				case 'teacher':
 				if (!checkProfileExists($conn, $_SESSION['user_id'], "teacher")){
 					header("Location: /attendence/teacher/profile.php?action=create&id=". $user['id']);
 				} else {
-					header("Location: /attendence/teacher/dashboard.php");
+					header("Location: /attendence/teacher/");
 				}
 				break;
 				case 'student':
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				}
 				else {
 
-					header("Location: /attendence/student/dashboard.php");
+					header("Location: /attendence/student/");
 				}
 				break;
 			}

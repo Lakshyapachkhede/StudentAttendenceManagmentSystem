@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 	}
 
 	$_SESSION['alert_message'] = "attendence done for class " . $class_data['name'] ;
-	header("Location: dashboard.php");
+	header("Location: /attendence/teacher/");
 	exit();
 
 

@@ -65,15 +65,15 @@ if (isset($_GET['id'])){
 
 
 
-		$_SESSION['alert_message'] = "Class Joining Request Sent <a href='/attendence/teacher/class.php?id=$class_id'> $class_name </a>";
-		header("Location: /attendence/teacher/class.php?id=$class_id");
+		$_SESSION['alert_message'] = "Class Joining Request Sent <a href='/attendence/class/class.php?id=$class_id'> $class_name </a>";
+		header("Location: /attendence/class/class.php?id=$class_id");
 		exit();
 
 	} else {
 		if ($isValidClass){
 
-			$_SESSION['alert_message'] = "Class Already Joined or already requested<a href='/attendence/teacher/class.php?id=$class_id'> $class_name </a>";
-			header("Location: /attendence/teacher/class.php?id=$class_id");
+			$_SESSION['alert_message'] = "Class Already Joined or already requested<a href='/attendence/class/class.php?id=$class_id'> $class_name </a>";
+			header("Location: /attendence/class/class.php?id=$class_id");
 			exit();
 		} else {
 			echo "Invalid Class id";

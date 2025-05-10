@@ -6,12 +6,12 @@ if (session_status() === PHP_SESSION_NONE) {
 
 if (isset($_SESSION['login'])){
 	if ($_SESSION['type'] == 'admin'){
-		header("Location: admin/dashboard.php");
+		header("Location: admin/");
 	}
 	else if ($_SESSION['type'] == 'teacher'){
-		header("Location: teacher/dashboard.php");
+		header("Location: teacher/");
 	} else {
-		header("Location: student/dashboard.php");
+		header("Location: student/");
 
 	}
 

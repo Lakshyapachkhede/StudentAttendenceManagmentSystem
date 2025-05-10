@@ -29,7 +29,7 @@ if (session_status() === PHP_SESSION_NONE) {
 			else if ($_SESSION['type'] == "teacher") {
 				echo" <li><a href='/attendence/teacher/profile.php?id=" .$_SESSION['user_id']. "&action=view' class='nav-links'>profile</a></li>";	
 
-				echo "<li><a href='/attendence/teacher/create_class.php' class='btn'>Create Class</a></li>";
+				echo "<li><a href='/attendence/class/create_class.php' class='btn'>Create Class</a></li>";
 			} else { // for admin
 
 			}

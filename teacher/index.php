@@ -75,7 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 	}
 
-	header("Location: dashboard.php");
+	header("Location: 
+		");
 	exit();
 
 
@@ -128,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 			</div>
 
 			<div class='user-row-right'>
-			<form action='/attendence/teacher/dashboard.php' method='POST'>
+			<form action='/attendence/teacher/' method='POST'>
 			<input type='hidden' value='". $row["student_id"]."'  name='student_id'>
 			<input type='hidden' value='". $row["class_id"]."'  name='class_id'>
 			<input type='hidden' name='action' value='approve'>
@@ -136,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 			</form>	
 
-			<form action='/attendence/teacher/dashboard.php' method='POST'>
+			<form action='/attendence/teacher/' method='POST'>
 			<input type='hidden' value='". $row["student_id"]."' name='student_id'>
 			<input type='hidden' value='". $row["class_id"]."' name='class_id'>
 			<input type='hidden' name='action' value='reject'>
@@ -174,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 		while($row = $result->fetch_assoc()){
 			echo "<div class='user-row'>
 			<div class='user-row-left'>
-			<a class='link td-u' href='/attendence/teacher/class.php?id=". $row['id']. " '>" . $row['name'] . "</a>
+			<a class='link td-u' href='/attendence/class/class.php?id=". $row['id']. " '>" . $row['name'] . "</a>
 			<p>Date: ".   (new DateTime($row["date_created"]))->format('F j, Y') . " </p>
 
 			<p>Branch: " . getBranchName($row['branch'], $conn) . "</p>
@@ -182,10 +183,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 			</div>
 
 			<div class='user-row-right'>
-			<a class='btn' href='class_report.php?id=".  $row["id"] ." '>Record</a>
+			<a class='btn' href='/attendence/class/class_report.php?id=".  $row["id"] ." '>Record</a>
 
 
-			<a class='btn btn-s' href='take_attendence.php?id=".  $row["id"] ." '>Attendence</a>
+			<a class='btn btn-s' href='/attendence/class/take_attendence.php?id=".  $row["id"] ." '>Attendence</a>
 			</div>
 
 			</div>";
