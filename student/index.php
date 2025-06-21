@@ -63,7 +63,7 @@ requireType('student');
 
 			<div class='user-row-right'>
 
-			<div class='round'><p>$percentage%</p></div>
+			<div class='round ". returnBackColorClass($percentage) ."'><p>$percentage%</p></div>
 
 
 			<a class='btn btn-s' href='/attendence/class/student_report.php?class_id={$row['class_id']}&student_id={$_SESSION['user_id']}'>Report</a>

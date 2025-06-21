@@ -77,5 +77,35 @@ function executeSql($conn, $sql){
 	return $result;
 }
 
+function returnTextColorClass($num)
+{
+	if($num > 75){
+		return " text-green";
+	} else if ($num > 50){
+		return " text-orange";
+	} else {
+		return " text-red";
+	}
+}
+
+function returnStatusTextColorClass($status)
+{
+	if($status == "present"){
+		return " text-green";
+	} else {
+		return " text-red";
+	}
+}
+
+function returnBackColorClass($num)
+{
+	if($num > 75){
+		return " back-green";
+	} else if ($num > 50){
+		return " back-orange";
+	} else {
+		return " back-red";
+	}
+}
 
 ?>

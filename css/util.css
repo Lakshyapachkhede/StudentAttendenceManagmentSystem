@@ -243,3 +243,32 @@ a{
 .w-i{
 	width: initial !important;
 }
+
+.back-red{
+	background-color: var(--color-red) !important;
+}
+
+.back-green{
+	background-color: var(--color-primary) !important;
+}
+
+.back-orange{
+	background-color: var(--color-accent) !important;
+}
+
+.text-red{
+	color: var(--color-red) !important;
+}
+
+.text-green{
+	color: var(--color-primary) !important;
+}
+
+.text-orange{
+	color: var(--color-accent) !important;
+}
+
+.text-link{
+	color: var(--color-primary) !important;
+	text-decoration: underline;
+}

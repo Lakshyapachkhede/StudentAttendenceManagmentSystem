@@ -206,7 +206,7 @@ function downloadPdf($conn, $class_id) {
 
 						echo"
 						<tr>
-						<td>$student_name</td>
+						<td ><a class='text-link' href='student_report.php?student_id=$user_id&class_id=$class_id'>$student_name</a></td>
 						<td>$student_roll_no</td>";
 
 						foreach($sessions_array  as $sess ){

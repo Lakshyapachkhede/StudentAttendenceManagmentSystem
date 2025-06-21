@@ -1,6 +1,7 @@
 <?php
 require '../db/db_connector.php';
 require '../session.php';
+require '../utils.php';
 requireType("student");
 
 if (getAttribute($conn, "user", "approved",  "id", $_SESSION['user_id'])){
