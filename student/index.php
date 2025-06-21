@@ -1,17 +1,10 @@
 <?php
 require '../session.php';
+require '../utils.php';
 require '../db/db_connector.php';
 requireType('student'); 
 
 
-function getAttribute($conn, $table, $attribute, $parameter ,$id){
-	$stmt = $conn->prepare("SELECT $attribute FROM $table WHERE $parameter = ?");
-	$stmt->bind_param('i', $id);
-	$stmt->execute();
-	$result = $stmt->get_result()->fetch_assoc()[$attribute] ?? null;
-	return $result;
-
-}
 
 
 ?>
@@ -39,14 +32,26 @@ function getAttribute($conn, $table, $attribute, $parameter ,$id){
 				<img src="/attendence/img/notification.png" alt="notifications" class="icon" id="notification-btn">
 			</div> -->
 
-
 		</div>
 
 		<?php
 		$student_id = $_SESSION['user_id'];
 		$result = $conn->query("SELECT * FROM attends WHERE student_id = $student_id");
 
+
+
+
 		while($row = $result->fetch_assoc()){
+
+			$totalClass = getNumberOfRecords($conn, "attendence_session WHERE class_id = {$row['class_id']}");
+			$totalAttended = $conn->query("SELECT count(*) FROM attendence WHERE student_id = $student_id AND status = 'present' AND session_id IN (SELECT id FROM attendence_session WHERE class_id = {$row['class_id']})")->fetch_array()[0];
+
+
+			$percentage = $totalClass > 0 
+					? round(($totalAttended / $totalClass) * 100, 0)
+					: 0;
+
+
 			echo "<div class='user-row'>
 			<div class='user-row-left'>
 			<a class='link td-u' href='/attendence/class/class.php?id=". $row['class_id']. " '>" . getAttribute($conn, "class", "name","id", $row['class_id']) . "</a>
@@ -57,10 +62,11 @@ function getAttribute($conn, $table, $attribute, $parameter ,$id){
 			</div>
 
 			<div class='user-row-right'>
-			<a class='btn' href='class.php?id=".  $row["class_id"] ." '>View</a>
+
+			<div class='round'><p>$percentage%</p></div>
 
 
-			<a class='btn btn-s' >Attendence</a>
+			<a class='btn btn-s' href='/attendence/class/student_report.php?class_id={$row['class_id']}&student_id={$_SESSION['user_id']}'>Report</a>
 			</div>
 
 			</div>";

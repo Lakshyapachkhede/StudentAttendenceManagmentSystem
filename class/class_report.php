@@ -51,6 +51,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' AND isset($_GET['start_date']) AND isset
 
 }
 
+function getMonthAndYear($dateString) {
+	$date = new DateTime($dateString);
+	return $date->format('M Y'); 
+}
+
+
+function getMonthNumber($dateString) {
+	$date = new DateTime($dateString);
+    return $date->format('m'); // 'm' gives month number with leading zero
+}
+
+
+function getMonth($monthNum) {
+    $date = DateTime::createFromFormat('!m', $monthNum); // 'm' = month number, '!' resets date
+    return $date->format('M'); // 'M' = short month name
+}
+
+
 
 function downloadPdf($conn, $class_id) {
 	$pdf = new FPDF();
@@ -263,37 +281,119 @@ function downloadPdf($conn, $class_id) {
 
 
 		<canvas id="attendenceChart" width="800" height="400"></canvas>
-	</div>
 
-	<?php require '../components/alert.php';?>
+		<h1 class="mt40">Month Report</h1>
 
+		<table class="styled-table">
+			<thead>
+				<tr>
+					<th>Month</th>
+					<th>Total<br>Classes</th>
+					<th>Attendence<br>Percentage</th>
 
+				</tr>
+			</thead>
+			<tbody>
 
+				<?php
 
-	<script>
-		const ctx = document.getElementById('attendenceChart').getContext('2d');
-		const attendenceChart = new Chart(ctx, {
-			type: 'line',
-			data: {
-				labels: [
-					<?php
-					foreach($sessions_array  as $sess ){
-						echo " ' ". date('d-m-y', strtotime($sess['date_time'])) ." ',";
-					}
+				$monthsAndYear = $conn->query("SELECT DISTINCT MONTH(date_time) AS month, YEAR(date_time) AS year
+					FROM attendence_session
+					WHERE class_id = $class_id
+					ORDER BY year, month;
+					");
 
+				while($row = $monthsAndYear->fetch_assoc() ){
+					echo "<tr>";
+					echo "<td>". getMonth($row['month'])." ". $row['year'] ."</td>";
+
+					$totalClasses = $conn->query("SELECT COUNT(*) FROM attendence_session WHERE class_id = $class_id AND MONTH(date_time) =".$row["month"]." AND YEAR(date_time)=". $row['year'])->fetch_array()[0];
 					
-					?>
+					echo "<td>$totalClasses</td>";
 
 
-				],
-				datasets: [{
-					label: 'Present',
-					data: [
+					$query = "
+					SELECT COUNT(*) AS total 
+					FROM attendence 
+					WHERE session_id IN (
+						SELECT id 
+						FROM attendence_session 
+						WHERE class_id = $class_id 
+						AND MONTH(date_time) = {$row['month']} 
+						AND YEAR(date_time) = {$row['year']}
+						) AND status = 'present'
+					";
 
 
+
+					$result = $conn->query($query);
+					$totalPresentMonth = $result->fetch_assoc()['total'];
+
+
+					$totalStudents = getNumberOfRecords($conn, "attends WHERE class_id = $class_id");
+
+					$sessionQuery = "
+					SELECT COUNT(*) AS total_sessions 
+					FROM attendence_session 
+					WHERE class_id = $class_id 
+					AND MONTH(date_time) = {$row['month']} 
+					AND YEAR(date_time) = {$row['year']}
+					";
+					$sessionResult = $conn->query($sessionQuery);
+					$totalSessions = $sessionResult->fetch_assoc()['total_sessions'];
+
+					$totalPossible = $totalStudents * $totalSessions;
+
+					$percentage = $totalPossible > 0 
+					? round(($totalPresentMonth / $totalPossible) * 100, 2)
+					: 0;
+
+					echo "<td>$percentage</td>";
+
+
+
+
+
+
+
+					echo "</tr>";
+
+				}
+
+				?>
+
+
+
+
+
+
+			</tbody>
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+		<?php require '../components/alert.php';?>
+
+
+
+
+		<script>
+			const ctx = document.getElementById('attendenceChart').getContext('2d');
+			const attendenceChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: [
 						<?php
 						foreach($sessions_array  as $sess ){
-							echo getNumberOfRecords($conn, "attendence WHERE session_id =". $sess['id'] ." AND status='present'") .",";
+							echo " ' ". date('d-m-y', strtotime($sess['date_time'])) ." ',";
 						}
 
 
@@ -301,65 +401,80 @@ function downloadPdf($conn, $class_id) {
 
 
 					],
-					fill: false,
-					borderColor: 'rgb(75, 192, 192)',
-					tension: 0.1
-				}]
-			},
-			options: {
-				responsive: true,
+					datasets: [{
+						label: 'Present',
+						data: [
 
-				plugins: {
-					
+
+							<?php
+							foreach($sessions_array  as $sess ){
+								echo getNumberOfRecords($conn, "attendence WHERE session_id =". $sess['id'] ." AND status='present'") .",";
+							}
+
+
+							?>
+
+
+						],
+						fill: false,
+						borderColor: 'rgb(75, 192, 192)',
+						tension: 0.1
+					}]
 				},
-				scales: {
-					y: {
-						beginAtZero: true,
-						min: 0,
-						max: 1 + <?php echo getNumberOfRecords($conn, "attends WHERE class_id = $class_id") ?>
+				options: {
+					responsive: true,
+
+					plugins: {
+
+					},
+					scales: {
+						y: {
+							beginAtZero: true,
+							min: 0,
+							max: 1 + <?php echo getNumberOfRecords($conn, "attends WHERE class_id = $class_id") ?>
+						}
 					}
 				}
-			}
-		});
-	</script>
+			});
+		</script>
 
 
-	<script type="text/javascript">
+		<script type="text/javascript">
 
-		document.querySelectorAll(".attendence-checkbox").forEach(checkbox => {
-			checkbox.addEventListener("change", function(){
+			document.querySelectorAll(".attendence-checkbox").forEach(checkbox => {
+				checkbox.addEventListener("change", function(){
 
-				const status = this.checked ? "present" : "absent";
-				const session_id = this.dataset.sessionId;
-				const student_id = this.dataset.studentId;
+					const status = this.checked ? "present" : "absent";
+					const session_id = this.dataset.sessionId;
+					const student_id = this.dataset.studentId;
 
-				fetch("update_attendence_api.php", {
-					method:'POST',
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					},
-					body: `session_id=${session_id}&student_id=${student_id}&status=${status}`
-				})
-				.then(response => response.json())
+					fetch("update_attendence_api.php", {
+						method:'POST',
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded'
+						},
+						body: `session_id=${session_id}&student_id=${student_id}&status=${status}`
+					})
+					.then(response => response.json())
 
-				.then(data => {
-					console.log(`Updated attendance for student ${student_id}:`, data);
-				}).catch(error => {
-					console.error('Error updating attendance:', error);
+					.then(data => {
+						console.log(`Updated attendance for student ${student_id}:`, data);
+					}).catch(error => {
+						console.error('Error updating attendance:', error);
+					});
+
+
 				});
-
 
 			});
 
-		});
 
-
-	</script>
+		</script>
 
 
 
 
 
 
-</body>
-</html>
+	</body>
+	</html>

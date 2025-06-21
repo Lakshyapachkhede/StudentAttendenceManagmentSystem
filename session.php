@@ -2,6 +2,7 @@
 session_start();
 
 
+
 define("SERVER_URL", "localhost"); 
 
 
@@ -16,6 +17,8 @@ function requireType($type){
         exit();
 	}
 }
+
+
 
 function isLoggedInUser($id)
 {

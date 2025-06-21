@@ -3,6 +3,15 @@ require '../db/db_connector.php';
 require '../session.php';
 requireType("student");
 
+if (getAttribute($conn, "user", "approved",  "id", $_SESSION['user_id'])){
+	$_SESSION['approved'] = 1;
+}
+else{
+		header("Location: /attendence/index.php"); 
+		$_SESSION['alert_message'] = "your account is not approved yet please wait till getting approved";
+        exit();
+}
+
 function checkAlreadyJoined($conn, $class_id)
 {
 	$user_id = $_SESSION['user_id'];

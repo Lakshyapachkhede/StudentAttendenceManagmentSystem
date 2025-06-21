@@ -148,12 +148,12 @@ $numClasses = getNumberOfRecords($conn, "class");
 				</div>
 
 				<div class='user-row-right'>
-				<form action='dashboard.php' method='POST'> 
+				<form action='index.php' method='POST'> 
 				<input type='hidden' name='approve_sign_up_req' value=". $row['id'] . ">
 				<button type='submit' class='btn'>Approve</button>
 				</form>
 
-				<form action='dashboard.php' method='POST'> 
+				<form action='index.php' method='POST'> 
 				<input type='hidden' name='decline_sign_up_req' value=". $row['id'] . ">
 				<button type='submit' class='btn btn-r'>Decline</button>
 				</form>
