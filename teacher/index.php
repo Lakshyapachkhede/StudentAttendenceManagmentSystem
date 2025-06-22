@@ -185,7 +185,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 			<a class='btn' href='/attendence/class/class_report.php?id=".  $row["id"] ." '>Record</a>
 
 
-			<a class='btn btn-s' href='/attendence/class/take_attendence.php?id=".  $row["id"] ." '>Attendence</a>
+			<a class='btn btn-s back-orange' href='/attendence/class/take_attendence.php?id=".  $row["id"] ." '>Attendence</a>
+
+			<form action='/attendence/class/open_attendence_window.php' method='get'>
+				<input type='hidden' value='{$row['id']}' name='class_id'>
+				<button type='submit' class='btn btn-s'>Open</button>
+			</form>
+
 			</div>
 
 			</div>";

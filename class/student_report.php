@@ -7,7 +7,7 @@ require '../utils.php';
 $user_type = $_SESSION['type'];
 
 $class_id = $_GET['class_id'];
-$student_id = $_GET['student_id'];
+$student_id = ($user_type == 'student') ? $_SESSION['user_id'] : $_GET['student_id'];
 
 $stmt = $conn->prepare("SELECT * FROM attends WHERE student_id = ? AND class_id = ?");
 $stmt->bind_param("ii", $student_id, $class_id);

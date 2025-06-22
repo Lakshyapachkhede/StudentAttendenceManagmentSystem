@@ -14,6 +14,8 @@ function getAttribute($conn, $table, $attribute, $parameter ,$value){
 
 }
 
+
+
 function getNumberOfRecords($conn, $table)
 {
 	$stmt = $conn->prepare("SELECT COUNT(*) FROM $table");
@@ -107,5 +109,15 @@ function returnBackColorClass($num)
 		return " back-red";
 	}
 }
+function isAttends($conn, $class_id, $student_id)
+{
+    $stmt = $conn->prepare("SELECT 1 FROM attends WHERE student_id = ? AND class_id = ?");
+    $stmt->bind_param("ii", $student_id, $class_id);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    return $result->num_rows > 0;
+}
+
 
 ?>

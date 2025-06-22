@@ -67,6 +67,14 @@ requireType('student');
 
 
 			<a class='btn btn-s' href='/attendence/class/student_report.php?class_id={$row['class_id']}&student_id={$_SESSION['user_id']}'>Report</a>
+
+			<form action='/attendence/class/mark_student_attendence.php' method='post'>
+			<input type='hidden' value='{$row['class_id']}' name='class_id'>
+				<button type='submit' class='btn'>Mark Attendance</button>
+			</form>
+
+
+
 			</div>
 
 			</div>";

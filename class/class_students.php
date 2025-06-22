@@ -66,8 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 	
 	<?php require '..\components\nav_sm.php'; ?>
 
-	<div class="container mt20">
-		<div class="d-f-col">
+	<div class="container mt20 d-f-col jc-sb">
+
 			
 			<?php 
 			
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 
 
-				echo"<div class='user-row'>
+				echo"<div class='user-row' style='width:100%;'>
 				<div class='user-row-left'>
 				<a class='user-row-name td-u' href='/attendence/" . $user_data['type']. "/profile.php?id=". $user_data['id'] . "&action=view'>" . $user_data['name'] . "</a>
 				<p>". $user_profile_data['roll_no'] ."</p>
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 			?>
 
 			
-		</div>
+
 
 	</div>
 
