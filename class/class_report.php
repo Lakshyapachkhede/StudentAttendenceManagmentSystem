@@ -2,7 +2,6 @@
 require '../db/db_connector.php';
 require '../session.php';
 require '../utils.php';
-require '../fpdf/fpdf.php';
 requireType("teacher");
 
 $class_id = $_GET['id'];
@@ -67,60 +66,6 @@ function getMonth($monthNum) {
     $date = DateTime::createFromFormat('!m', $monthNum); // 'm' = month number, '!' resets date
     return $date->format('M'); // 'M' = short month name
 }
-
-
-
-function downloadPdf($conn, $class_id) {
-	$pdf = new FPDF();
-	$pdf->AddPage();
-	$pdf->SetFont('Arial', 'B', 10);
-
-    // Table headers
-	$pdf->Cell(60, 10, 'Name', 1);
-	$pdf->Cell(30, 10, 'Roll No', 1);
-
-    // Get all sessions
-	$sessions = getRecords($conn, "attendence_session", "class_id", $class_id);
-	$sessions_array = [];
-	foreach ($sessions as $session) {
-		$sessions_array[] = $session;
-        // Make session header compact
-		$pdf->Cell(20, 10, date('d-m', strtotime($session['date_time'])), 1); 
-	}
-
-	$pdf->Ln();
-
-    // Get all students
-	$all_students = getRecords($conn, "attends", "class_id", $class_id);
-	while ($row = $all_students->fetch_assoc()) {
-		$user_id = $row['student_id'];
-		$student_name = getAttribute($conn, "user", "name", "id", $user_id);
-		$student_roll_no = getAttribute($conn, "student_profile", "roll_no", "student_id", $user_id);
-
-		$pdf->Cell(60, 10, $student_name, 1);
-		$pdf->Cell(30, 10, $student_roll_no, 1);
-
-		foreach ($sessions_array as $sess) {
-			$stmt = $conn->prepare("SELECT status FROM attendence WHERE session_id = ? AND student_id = ?");
-			$stmt->bind_param("ii", $sess['id'], $user_id);
-			$stmt->execute();
-			$result = $stmt->get_result();
-			$r = $result->fetch_assoc();
-
-			$status = '-';
-			if ($r) {
-				$status = ($r['status'] === 'present') ? 'P' : 'A';
-			}
-
-			$pdf->Cell(20, 10, $status, 1);
-		}
-
-		$pdf->Ln();
-	}
-
-	$pdf->Output('D', 'attendance_report.pdf');
-}
-
 
 
 

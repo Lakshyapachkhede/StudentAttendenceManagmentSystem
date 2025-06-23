@@ -51,7 +51,13 @@ $message = "Link Copied to Clipboard.";
 					</div>
 
 					<?php if ($_SESSION['type'] == "teacher"):?>
-						<img src="/attendence/img/copy.png"  class="icon" id="shareBtn">
+						<div class="d-f">
+							<img src="/attendence/img/copy.png"  class="icon" id="shareBtn"
+							>
+							<a href="select_class_location.php?class_id=<?=$class_id?>"><img src="/attendence/img/location.png"  class="icon"></a>
+						</div>
+
+
 					<?php else: ?>	
 						<a class="btn" href="/attendence/class/join_class.php?id=<?=$class_id?>">Join</a>
 

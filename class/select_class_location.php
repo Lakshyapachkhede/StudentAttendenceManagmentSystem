@@ -77,69 +77,105 @@ $latitude = getAttribute($conn, "class", "latitude", "id", $class_id);
 		</form>
 	</div>
 	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-	<script>
-			let longitudeInput = document.getElementById("longitude");
-			let latitudeInput = document.getElementById("latitude");
+	<script>	
+		if ("permissions" in navigator && "geolocation" in navigator) {
+			navigator.permissions.query({ name: "geolocation" }).then((permissionStatus) => {
+				console.log("Geolocation permission state:", permissionStatus.state);
+
+				if (permissionStatus.state === "granted") {
+					console.log("Permission already granted. You may use geolocation freely.");
+				} else if (permissionStatus.state === "prompt") {
+					console.log("Permission will be requested now.");
+
+      // This triggers the browser's permission prompt
+					navigator.geolocation.getCurrentPosition(
+						(position) => {
+							console.log("User granted permission:", position.coords);
+							alert("Location permission granted. Please reload the page to continue.");
+						},
+						(error) => {
+							console.error("User denied or error occurred:", error.message);
+							alert("Location permission was not granted. Please reload and try again.");
+						}
+						);
+				} else if (permissionStatus.state === "denied") {
+					console.warn("Geolocation access is denied.");
+					alert("Location access is denied in browser settings. Please enable it and reload the page.");
+				}
+			});
+		} else {
+			console.warn("Geolocation or Permissions API not supported in this browser.");
+			alert("Your browser does not support location permissions.");
+		}
 
 
-			navigator.geolocation.getCurrentPosition(function (position) {
 
 
 
-				const lat = <?php if ($latitude != NULL){echo $latitude;} else {echo "position.coords.latitude";} ?> ;
-				const lon = <?php if ($longitude != NULL){echo $longitude;} else {echo "position.coords.longitude";} ?> ;
-				longitudeInput.value = lon;
-				latitudeInput.value = lat;
+		let longitudeInput = document.getElementById("longitude");
+		let latitudeInput = document.getElementById("latitude");
 
 
-				const map = L.map('map').setView([lat, lon], 13);
+		navigator.geolocation.getCurrentPosition(function (position) {
 
-				L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-					attribution: '© OpenStreetMap contributors'
-				}).addTo(map);
+
+
+			const lat = <?php if ($latitude != NULL){echo $latitude;} else {echo "position.coords.latitude";} ?> ;
+			const lon = <?php if ($longitude != NULL){echo $longitude;} else {echo "position.coords.longitude";} ?> ;
+
+			
+			longitudeInput.value = lon;
+			latitudeInput.value = lat;
+
+
+			const map = L.map('map').setView([lat, lon], 13);
+
+			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				attribution: '© OpenStreetMap contributors'
+			}).addTo(map);
 
             // Show current location
-				L.marker([lat, lon]).addTo(map)
-				.bindPopup("Selected Location")
-				.openPopup();
+			L.marker([lat, lon]).addTo(map)
+			.bindPopup("Selected Location")
+			.openPopup();
 
             // Add marker for selection
-				let selectedMarker;
+			let selectedMarker;
 
             // Listen for clicks on the map
-				map.on('click', function (e) {
-					const selectedLat = e.latlng.lat;
-					const selectedLon = e.latlng.lng;
-					longitudeInput.value = selectedLon.toFixed(5);
-					latitudeInput.value = selectedLat.toFixed(5);
+			map.on('click', function (e) {
+				const selectedLat = e.latlng.lat;
+				const selectedLon = e.latlng.lng;
+				longitudeInput.value = selectedLon.toFixed(5);
+				latitudeInput.value = selectedLat.toFixed(5);
 
                 // Fetch address using OpenStreetMap Nominatim
-					fetch(`https://nominatim.openstreetmap.org/reverse?lat=${selectedLat}&lon=${selectedLon}&format=json`)
-					.then(res => res.json())
-					.then(data => {
-						const displayName = data.display_name || "Unknown location";
+				fetch(`https://nominatim.openstreetmap.org/reverse?lat=${selectedLat}&lon=${selectedLon}&format=json`)
+				.then(res => res.json())
+				.then(data => {
+					const displayName = data.display_name || "Unknown location";
 
-						if (selectedMarker) {
-							selectedMarker.setLatLng(e.latlng);
-						} else {
-							selectedMarker = L.marker(e.latlng).addTo(map);
-						}
+					if (selectedMarker) {
+						selectedMarker.setLatLng(e.latlng);
+					} else {
+						selectedMarker = L.marker(e.latlng).addTo(map);
+					}
 
-						selectedMarker.bindPopup(`<b>${displayName}</b><br>Lat: ${selectedLat.toFixed(5)}, Lng: ${selectedLon.toFixed(5)}`).openPopup();
-						console.log("Selected Location:", displayName);
-					})
-					.catch(err => {
-						alert("Failed to get location name.");
-						console.error(err);
-					});
+					selectedMarker.bindPopup(`<b>${displayName}</b><br>Lat: ${selectedLat.toFixed(5)}, Lng: ${selectedLon.toFixed(5)}`).openPopup();
+					console.log("Selected Location:", displayName);
+				})
+				.catch(err => {
+					alert("Failed to get location name.");
+					console.error(err);
 				});
-
-
-			}, function (error) {
-				alert("Geolocation error: " + error.message);
 			});
-		</script>
+
+
+		}, function (error) {
+			alert("Geolocation error: " + error.message);
+		});
+	</script>
 	<?php require '../components/alert.php';?>
-		
-	</body>
-	</html>
+
+</body>
+</html>
