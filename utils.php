@@ -119,5 +119,11 @@ function isAttends($conn, $class_id, $student_id)
     return $result->num_rows > 0;
 }
 
+function getFormattedCurrentDate() {
+    return date('F j, Y'); 
+
+}
+
+
 
 ?>

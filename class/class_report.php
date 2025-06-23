@@ -28,12 +28,6 @@ $max_session_date = (getHtmlInputDate($max_session_date->fetch_assoc()['MAX(date
 
 
 
-
-
-if (isset($_GET['download'])){
-	downloadPdf($conn, $class_id);
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'GET' AND isset($_GET['start_date']) AND isset($_GET['end_date'])) {
 	$start_date = new DateTime($_GET['start_date']);
 	$end_date = new DateTime($_GET['end_date']);
@@ -97,7 +91,11 @@ function getMonth($monthNum) {
 			echo "<p class='mb10 mt20 t-warn'>$error</p>";
 		}?>
 
-		<h1 >Class Report - <?= getAttribute($conn, "class", "name", "id", $class_id) ?></h1>
+		<div class="d-fcc jc-sb g-10">
+			<h1 >Class Report - <?= getAttribute($conn, "class", "name", "id", $class_id) ?></h1>
+
+			<a href="/attendence/class/download_report.php?id=<?=$class_id?>" class="btn">Download</a>
+		</div>
 
 		<div class="scroll-wrapper">
 
