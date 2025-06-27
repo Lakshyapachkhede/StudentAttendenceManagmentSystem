@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 <body>
 	
 
-	<?php require '..\components\nav_sm.php'; ?>
+	<?php require '../components/nav_sm.php'; ?>
 
 	<div class="container mt40">
 		

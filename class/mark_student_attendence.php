@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	</style>
 </head>
 <body>
-	<?php require '..\components\nav_sm.php'; ?>
+	<?php require '../components/nav_sm.php'; ?>
 	<div class="container mt40">
 
 		<h1>Mark Attendence for class - <?= getAttribute($conn, "class", "name", "id", $class_id) ?></h1>

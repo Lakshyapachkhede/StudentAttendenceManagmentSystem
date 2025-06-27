@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 			<div class="f-input p0 d-fcc jc-sb">
 				<input type="password" name="password" placeholder="password" class=" f-input input-none " id="password" required minlength="6">
-				<img src="\attendence\img\show.png" alt="Show" class="input-icon" id="password-icon">
+				<img src="/attendence/img/show.png" alt="Show" class="input-icon" id="password-icon">
 			</div>		
 
 			<?php if ($error != ""){

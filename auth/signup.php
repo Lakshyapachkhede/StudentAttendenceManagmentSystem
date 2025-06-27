@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		// $to = $email;
 		// $subject = "Your OTP To Sign Up For SAM System";
-		// $message = "Hello $name,\n\n Your Otp is $otp\n\nUse this to complete your registration.";
+		// $message = "Hello $name,/n/n Your Otp is $otp/n/nUse this to complete your registration.";
 
 		// if (mail($to, $subject, $message)){
 		// 	header("Location: verify_otp.php");
@@ -124,12 +124,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 			<div class="f-input p0 d-fcc jc-sb">
 				<input type="password" name="password" placeholder="password" class=" f-input input-none " id="password" required minlength="6">
-				<img src="\attendence\img\show.png" alt="Show" class="input-icon" id="password-icon">
+				<img src="/attendence/img/show.png" alt="Show" class="input-icon" id="password-icon">
 			</div>		
 
 			<div class="f-input p0 d-fcc jc-sb" >
 				<input type="password" name="cpassword"placeholder="confirm password" class="f-input input-none" id="cpassword" required>
-				<img src="\attendence\img\show.png" alt="Show" class="input-icon" id="cpassword-icon">
+				<img src="/attendence/img/show.png" alt="Show" class="input-icon" id="cpassword-icon">
 
 			</div>
 

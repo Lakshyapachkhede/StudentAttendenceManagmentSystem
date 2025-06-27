@@ -61,7 +61,7 @@ $latitude = getAttribute($conn, "class", "latitude", "id", $class_id);
 	</style>
 </head>
 <body>
-	<?php require '..\components\nav_sm.php'; ?>
+	<?php require '../components/nav_sm.php'; ?>
 	<div class="container mt40">
 
 		<h1>Select Location for class - <?= getAttribute($conn, "class", "name", "id", $class_id) ?></h1>

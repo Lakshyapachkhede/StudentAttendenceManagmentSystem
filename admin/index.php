@@ -73,7 +73,7 @@ require '../utils.php';
 $numStudent = getTotalUsers($conn, "student");
 $numTeacher = getTotalUsers($conn, "teacher");
 $numClasses = getNumberOfRecords($conn, "class");
-
+$attendenceNumber = getNumberOfRecords($conn, "attendence");
 
 ?>
 
@@ -113,7 +113,7 @@ $numClasses = getNumberOfRecords($conn, "class");
 				<p class="admin-card-text">Total Classes</p>
 			</div>		
 			<div class="admin-card">
-				<p class="admin-card-num" data-target="250000">0</p>
+				<p class="admin-card-num" data-target="<?=$attendenceNumber?>">0</p>
 
 				<p class="admin-card-text">Total Attendence</p>
 			</div>

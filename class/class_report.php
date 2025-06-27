@@ -80,7 +80,7 @@ function getMonth($monthNum) {
 </head>
 <body>
 	
-	<?php require '..\components\nav_sm.php'; ?>
+	<?php require '../components/nav_sm.php'; ?>
 
 	<div class="container d-f-col mt20">
 
@@ -117,7 +117,7 @@ function getMonth($monthNum) {
 						$sessions_array = [];
 						while($session = $sessions->fetch_assoc()){
 							$sessions_array[] = $session;
-							echo "<th class='tac'>". date('d-m-y', strtotime($session['date_time']))."<br>". date('H:i A', strtotime($session['date_time'])) ."</th>";
+							echo "<th class='tac'>". date('d-m-y', strtotime($session['date_time']))."<br>". date('h:i A', strtotime($session['date_time'])) ."</th>";
 
 						}
 

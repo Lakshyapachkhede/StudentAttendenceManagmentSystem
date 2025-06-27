@@ -20,7 +20,7 @@ requireType('student');
 	<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-	<?php require '..\components\nav_sm.php'; ?>
+	<?php require '../components/nav_sm.php'; ?>
 
 	<div class="container mt20">
 

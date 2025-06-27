@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 </head>
 <body>
 	
-	<?php require '..\components\nav_sm.php'; ?>
+	<?php require '../components/nav_sm.php'; ?>
 
 
 	<div class="notification-con" id="notification-con">

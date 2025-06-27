@@ -25,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 	$all_students = isset($_POST['all_students']) ? $_POST['all_students'] : [];
 	$datetime = str_replace('T', ' ', $_POST['attendence_time']);
 
+
+
 	if (count($all_students) == 0){
 		$_SESSION['alert_message'] = $class_data['name'] . "has no students";
 	} else {
@@ -64,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 	<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-	<?php require '..\components\nav_sm.php'; ?>
+	<?php require '../components/nav_sm.php'; ?>
 
 	<div class="container mt40">
 
@@ -77,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 			<div class="d-f-col">
 				<div class="d-fcc">
 					<h2 class="text-dark"><?=$class_data['name']?></h2>
-					<input type="datetime-local" id="attendence_time" class="ml10 f-input w-i" name="attendence_time" value="<?=date('Y-m-d\TH:i')?>">
+					<input type="datetime-local" id="attendence_time" class="ml10 f-input w-i" name="attendence_time" required>
 				</div>
 				<div class="scroll-wrapper">
 
