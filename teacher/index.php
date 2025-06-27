@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 	<div class="notification-con" id="notification-con">
 		
-		<img src="/attendence/img/remove.png" alt="Close" class="icon" id="notification-close-btn">
+		<img src="/img/remove.png" alt="Close" class="icon" id="notification-close-btn">
 		<?php
 
 		$stmt = $conn->prepare("SELECT * FROM join_requests WHERE teacher_id = ?");
@@ -128,19 +128,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 			</div>
 
 			<div class='user-row-right'>
-			<form action='/attendence/teacher/' method='POST'>
+			<form action='/teacher/' method='POST'>
 			<input type='hidden' value='". $row["student_id"]."'  name='student_id'>
 			<input type='hidden' value='". $row["class_id"]."'  name='class_id'>
 			<input type='hidden' name='action' value='approve'>
-			<button type='submit' class='btn-reset'><img src='/attendence/img/check.png' alt='' class='icon p0' ></button>
+			<button type='submit' class='btn-reset'><img src='/img/check.png' alt='' class='icon p0' ></button>
 
 			</form>	
 
-			<form action='/attendence/teacher/' method='POST'>
+			<form action='/teacher/' method='POST'>
 			<input type='hidden' value='". $row["student_id"]."' name='student_id'>
 			<input type='hidden' value='". $row["class_id"]."' name='class_id'>
 			<input type='hidden' name='action' value='reject'>
-			<button type='submit'  class='btn-reset'><img src='/attendence/img/remove.png' alt='' class='icon p0'></button>
+			<button type='submit'  class='btn-reset'><img src='/img/remove.png' alt='' class='icon p0'></button>
 
 			</form>
 			</div>
@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 				<?php if ($notifications > 0): ?>
 					<span class="icon-num"><?= $notifications ?></span>
 				<?php endif ?>
-				<img src="/attendence/img/notification.png" alt="notifications" class="icon " id="notification-btn">
+				<img src="/img/notification.png" alt="notifications" class="icon " id="notification-btn">
 			</div>
 
 
@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 		while($row = $result->fetch_assoc()){
 			echo "<div class='user-row'>
 			<div class='user-row-left'>
-			<a class='link td-u' href='/attendence/class/class.php?id=". $row['id']. " '>" . $row['name'] . "</a>
+			<a class='link td-u' href='/class/class.php?id=". $row['id']. " '>" . $row['name'] . "</a>
 			<p>Date: ".   (new DateTime($row["date_created"]))->format('F j, Y') . " </p>
 
 			<p>Branch: " . getBranchName($row['branch'], $conn) . "</p>
@@ -182,12 +182,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 			</div>
 
 			<div class='user-row-right'>
-			<a class='btn' href='/attendence/class/class_report.php?id=".  $row["id"] ." '>Record</a>
+			<a class='btn' href='/class/class_report.php?id=".  $row["id"] ." '>Record</a>
 
 
-			<a class='btn btn-s back-orange' href='/attendence/class/take_attendence.php?id=".  $row["id"] ." '>Attendence</a>
+			<a class='btn btn-s back-orange' href='/class/take_attendence.php?id=".  $row["id"] ." '>Attendence</a>
 
-			<form action='/attendence/class/open_attendence_window.php' method='get'>
+			<form action='/class/open_attendence_window.php' method='get'>
 				<input type='hidden' value='{$row['id']}' name='class_id'>
 				<button type='submit' class='btn btn-s'>Open</button>
 			</form>

@@ -6,7 +6,7 @@ requireType("teacher");
 
 function openWindow($conn, $class_id){
 
-	$newSessionId = createAttendenceSession($conn, $class_id, date("Y-m-d H:i:s"));
+	$newSessionId = createAttendenceSession($conn, $class_id, date("Y-m-d h:i:s"));
 
 
 
@@ -26,7 +26,7 @@ function openWindow($conn, $class_id){
 		$stmt->execute();
 	}
 
-	header("Location: /attendence/index.php");
+	header("Location: /index.php");
 
 }
 
@@ -38,7 +38,7 @@ $class_id = $_GET['class_id'];
 $teacher_id = getAttribute($conn, "class", "teacher_id", "id", $class_id);
 
 if(!isLoggedInUser($teacher_id)){
-	header("Location: /attendence/index.php");
+	header("Location: /index.php");
 
 }
 
@@ -47,7 +47,7 @@ if (getAttribute($conn, "user", "approved",  "id", $_SESSION['user_id'])){
 	$_SESSION['approved'] = 1;
 }
 else{
-	header("Location: /attendence/index.php"); 
+	header("Location: /index.php"); 
 	$_SESSION['alert_message'] = "your account is not approved yet please wait till getting approved";
 	exit();
 }
@@ -79,7 +79,7 @@ if ($currentOpenSession == NULL){
 
 
 
-header("Location: /attendence/index.php");
+header("Location: /index.php");
 
 ?>
 

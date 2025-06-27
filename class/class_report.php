@@ -94,7 +94,7 @@ function getMonth($monthNum) {
 		<div class="d-fcc jc-sb g-10">
 			<h1 >Class Report - <?= getAttribute($conn, "class", "name", "id", $class_id) ?></h1>
 
-			<a href="/attendence/class/download_report.php?id=<?=$class_id?>" class="btn">Download</a>
+			<a href="/class/download_report.php?id=<?=$class_id?>" class="btn">Download</a>
 		</div>
 
 		<div class="scroll-wrapper">

@@ -24,9 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 	$present = isset($_POST['present']) ? $_POST['present'] : [];
 	$all_students = isset($_POST['all_students']) ? $_POST['all_students'] : [];
 	$datetime = str_replace('T', ' ', $_POST['attendence_time']);
-
-
-
+    
 	if (count($all_students) == 0){
 		$_SESSION['alert_message'] = $class_data['name'] . "has no students";
 	} else {
@@ -40,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 	}
 
 	$_SESSION['alert_message'] = "attendence done for class " . $class_data['name'] ;
-	header("Location: /attendence/teacher/");
+	header("Location: /teacher/");
 	exit();
 
 

@@ -9,7 +9,7 @@ if (getAttribute($conn, "user", "approved",  "id", $_SESSION['user_id'])){
 	$_SESSION['approved'] = 1;
 }
 else{
-	header("Location: /attendence/index.php"); 
+	header("Location: /index.php"); 
 	$_SESSION['alert_message'] = "your account is not approved yet please wait till getting approved";
 	exit();
 }

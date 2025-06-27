@@ -59,22 +59,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 			switch ($_SESSION['type']) {
 				case 'admin':
-				header("Location: /attendence/admin/");
+				header("Location: /admin/");
 				break;
 				case 'teacher':
 				if (!checkProfileExists($conn, $_SESSION['user_id'], "teacher")){
-					header("Location: /attendence/teacher/profile.php?action=create&id=". $user['id']);
+					header("Location: /teacher/profile.php?action=create&id=". $user['id']);
 				} else {
-					header("Location: /attendence/teacher/");
+					header("Location: /teacher/");
 				}
 				break;
 				case 'student':
 				if (!checkProfileExists($conn, $_SESSION['user_id'], "student")){
-					header("Location: /attendence/student/profile.php?action=create&id=". $user['id']);
+					header("Location: /student/profile.php?action=create&id=". $user['id']);
 				}
 				else {
 
-					header("Location: /attendence/student/");
+					header("Location: /student/");
 				}
 				break;
 			}
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		<?php  require '../components/nav.php';?>
 		<?php if ($accountCreated): ?>
 			<div class="alert show" id="alert">
-				<img src="/attendence/img/check.png" alt="Check Mark">
+				<img src="/img/check.png" alt="Check Mark">
 				<p class="f-r">Your account was created! Please log in.</p>
 			</div>
 		<?php endif; ?>
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 			<div class="f-input p0 d-fcc jc-sb">
 				<input type="password" name="password" placeholder="password" class=" f-input input-none " id="password" required minlength="6">
-				<img src="/attendence/img/show.png" alt="Show" class="input-icon" id="password-icon">
+				<img src="/img/show.png" alt="Show" class="input-icon" id="password-icon">
 			</div>		
 
 			<?php if ($error != ""){
@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			let isPassword = passwordInput.type === "password";
 			passwordInput.type = isPassword ? "text" : "password";
 
-			this.src = isPassword ? "/attendence/img/hide.png" : "/attendence/img/show.png";
+			this.src = isPassword ? "/img/hide.png" : "/img/show.png";
 		});	
 
 

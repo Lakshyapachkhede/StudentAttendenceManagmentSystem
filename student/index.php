@@ -29,7 +29,7 @@ requireType('student');
 
 			<!-- <div class="icon-wrapper">
 				<span class="icon-num"><?= $notifications ?></span>
-				<img src="/attendence/img/notification.png" alt="notifications" class="icon" id="notification-btn">
+				<img src="/img/notification.png" alt="notifications" class="icon" id="notification-btn">
 			</div> -->
 
 		</div>
@@ -54,7 +54,7 @@ requireType('student');
 
 			echo "<div class='user-row'>
 			<div class='user-row-left'>
-			<a class='link td-u' href='/attendence/class/class.php?id=". $row['class_id']. " '>" . getAttribute($conn, "class", "name","id", $row['class_id']) . "</a>
+			<a class='link td-u' href='/class/class.php?id=". $row['class_id']. " '>" . getAttribute($conn, "class", "name","id", $row['class_id']) . "</a>
 			<p>Joined: ".   (new DateTime($row["date_joined"]))->format('F j, Y') . "</p>
 
 			<p>Branch: " . getAttribute($conn, "branch", "full_name","id", getAttribute($conn, "class", "branch","id", $row['class_id'])) . "</p>
@@ -66,9 +66,9 @@ requireType('student');
 			<div class='round ". returnBackColorClass($percentage) ."'><p>$percentage%</p></div>
 
 
-			<a class='btn btn-s' href='/attendence/class/student_report.php?class_id={$row['class_id']}&student_id={$_SESSION['user_id']}'>Report</a>
+			<a class='btn btn-s' href='/class/student_report.php?class_id={$row['class_id']}&student_id={$_SESSION['user_id']}'>Report</a>
 
-			<a href='/attendence/class/mark_student_attendence.php?class_id={$row['class_id']}' method='post'>
+			<a href='/class/mark_student_attendence.php?class_id={$row['class_id']}' method='post'>
 				<button type='submit' class='btn'>Mark Attendance</button>
 			</a>
 

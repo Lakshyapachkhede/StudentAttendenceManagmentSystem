@@ -7,14 +7,14 @@ if (session_status() === PHP_SESSION_NONE) {
 <nav class="navbar d-fcc">
 
 	<div class="nav-left d-fcc">
-		<a href="/attendence"><img src="/attendence/img/logo.png" alt="Logo" class="logo"></a>
+		<a href="/"><img src="/img/logo.png" alt="Logo" class="logo"></a>
 		<p><span>Sam</span>System</p> 
 	</div>
 
 
 	<div class="nav-right d-fcc side-bar" id="side-bar">
 		<ul class="nav-links-ul d-fcc ul-sn">
-			<img src="/attendence/img/remove.png" alt="Close" class="icon-s nav-icon-hide" id="nav-close-btn">
+			<img src="/img/remove.png" alt="Close" class="icon-s nav-icon-hide" id="nav-close-btn">
 			<li><a href="" class="nav-links">Features</a></li>
 			<li><a href="" class="nav-links">Guide</a></li>
 			<li><a href="" class="nav-links">About</a></li>
@@ -24,11 +24,11 @@ if (session_status() === PHP_SESSION_NONE) {
 			<?php
 
 			if (isset($_SESSION['login'])){
-				echo "<li><a href='/attendence/auth/logout.php' class='btn-o'>Log out</a></li>";
+				echo "<li><a href='/auth/logout.php' class='btn-o'>Log out</a></li>";
 			}
 			else{
-				echo "<li><a href='/attendence/auth/login.php'class='login-link'>Log In</a></li>";
-				echo "<li><a href='/attendence/auth/signup.php' class='btn-o'>Sign Up</a></li>";
+				echo "<li><a href='/auth/login.php'class='login-link'>Log In</a></li>";
+				echo "<li><a href='/auth/signup.php' class='btn-o'>Sign Up</a></li>";
 			}
 
 
@@ -39,7 +39,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 	</div>
 
-	<img src="/attendence/img/nav.png" alt="Close" class="icon-s nav-icon-hide"  id="nav-open-btn">
+	<img src="/img/nav.png" alt="Close" class="icon-s nav-icon-hide"  id="nav-open-btn">
 </nav>
 
 

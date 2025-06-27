@@ -8,7 +8,7 @@ if (getAttribute($conn, "user", "approved",  "id", $_SESSION['user_id'])){
 	$_SESSION['approved'] = 1;
 }
 else{
-		header("Location: /attendence/index.php"); 
+		header("Location: /index.php"); 
 		$_SESSION['alert_message'] = "your account is not approved yet please wait till getting approved";
         exit();
 }
@@ -75,15 +75,15 @@ if (isset($_GET['id'])){
 
 
 
-		$_SESSION['alert_message'] = "Class Joining Request Sent <a href='/attendence/class/class.php?id=$class_id'> $class_name </a>";
-		header("Location: /attendence/class/class.php?id=$class_id");
+		$_SESSION['alert_message'] = "Class Joining Request Sent <a href='/class/class.php?id=$class_id'> $class_name </a>";
+		header("Location: /class/class.php?id=$class_id");
 		exit();
 
 	} else {
 		if ($isValidClass){
 
-			$_SESSION['alert_message'] = "Class Already Joined or already requested<a href='/attendence/class/class.php?id=$class_id'> $class_name </a>";
-			header("Location: /attendence/class/class.php?id=$class_id");
+			$_SESSION['alert_message'] = "Class Already Joined or already requested<a href='/class/class.php?id=$class_id'> $class_name </a>";
+			header("Location: /class/class.php?id=$class_id");
 			exit();
 		} else {
 			echo "Invalid Class id";

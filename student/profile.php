@@ -240,7 +240,7 @@ $stmt->close();
 
 					<?php 
 					if ($_SESSION["user_id"] == $user_data['id']){
-						echo "<a href='/attendence/student/profile.php?id=" .  $_SESSION['user_id'] . "&action=update' class='profile-update-icon'><img src='/attendence/img/edit.png'  class='icon'></a>	";
+						echo "<a href='/student/profile.php?id=" .  $_SESSION['user_id'] . "&action=update' class='profile-update-icon'><img src='/img/edit.png'  class='icon'></a>	";
 					}
 
 					?>

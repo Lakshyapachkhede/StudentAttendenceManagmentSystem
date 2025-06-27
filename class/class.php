@@ -39,27 +39,27 @@ $message = "Link Copied to Clipboard.";
 	<div class="container mt40">
 		<div class="class">
 			<div class="class-left">
-				<img src="/attendence/img/user.jpg" alt="">
+				<img src="/img/user.jpg" alt="">
 			</div>
 			<div class="class-right  mw-80">
 
 				<div class="d-f jc-sb  mb10 ai-c">
 					
 					<div class="d-f g-10 class-name-date">
-						<a class = "link"href="/attendence/teacher/profile.php?id=<?=$teacher_id?>"><?= $teacher_name ?></a>
+						<a class = "link"href="/teacher/profile.php?id=<?=$teacher_id?>"><?= $teacher_name ?></a>
 						<p> <?php echo (new DateTime($class_data["date_created"]))->format('F j, Y'); ?></p>
 					</div>
 
 					<?php if ($_SESSION['type'] == "teacher"):?>
 						<div class="d-f">
-							<img src="/attendence/img/copy.png"  class="icon" id="shareBtn"
+							<img src="/img/copy.png"  class="icon" id="shareBtn"
 							>
-							<a href="select_class_location.php?class_id=<?=$class_id?>"><img src="/attendence/img/location.png"  class="icon"></a>
+							<a href="select_class_location.php?class_id=<?=$class_id?>"><img src="/img/location.png"  class="icon"></a>
 						</div>
 
 
 					<?php else: ?>	
-						<a class="btn" href="/attendence/class/join_class.php?id=<?=$class_id?>">Join</a>
+						<a class="btn" href="/class/join_class.php?id=<?=$class_id?>">Join</a>
 
 
 					<?php endif; ?>
@@ -109,7 +109,7 @@ $message = "Link Copied to Clipboard.";
 
 					echo"<div class='user-row'>
 					<div class='user-row-left'>
-					<a class='user-row-name td-u' href='/attendence/" . $user_data['type']. "/profile.php?id=". $user_data['id'] . "&action=view'>" . $user_data['name'] . "</a>
+					<a class='user-row-name td-u' href='/" . $user_data['type']. "/profile.php?id=". $user_data['id'] . "&action=view'>" . $user_data['name'] . "</a>
 					<p>". $user_profile_data['roll_no'] ."</p>
 					<p class='user-row-date'>Joined: ".  getFormattedDate($row['date_joined']). " </p>
 
@@ -135,7 +135,7 @@ $message = "Link Copied to Clipboard.";
 
 
 	<div class="alert" id="alert">
-		<img src="/attendence/img/check.png" alt="Check Mark">
+		<img src="/img/check.png" alt="Check Mark">
 		<p class="f-r"><?= $message ?></p>
 	</div>
 
@@ -145,7 +145,7 @@ $message = "Link Copied to Clipboard.";
 	<script type="text/javascript">
 		let alert = document.getElementById("alert");
 		document.getElementById('shareBtn').addEventListener('click', () => {
-			navigator.clipboard.writeText("<?=SERVER_URL?>/attendence/class/class.php?id=<?=$class_id?>");
+			navigator.clipboard.writeText("<?=SERVER_URL?>/class/class.php?id=<?=$class_id?>");
 
 
 			alert.classList.toggle("show");

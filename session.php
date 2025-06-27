@@ -3,7 +3,7 @@ session_start();
 
 
 
-define("SERVER_URL", "localhost"); 
+define("SERVER_URL", "https://attendence.42web.io"); 
 
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['type'])){

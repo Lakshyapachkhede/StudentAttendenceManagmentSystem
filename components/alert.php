@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 if (isset($_SESSION['alert_message'])){
 	echo "	<div class='alert show'>
-	<img src='/attendence/img/check.png' alt='Check Mark'>
+	<img src='/img/check.png' alt='Check Mark'>
 	<p class='f-r'>" . $_SESSION['alert_message'] ."</p>
 	</div>";
 	unset($_SESSION['alert_message']) ;

@@ -124,12 +124,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 			<div class="f-input p0 d-fcc jc-sb">
 				<input type="password" name="password" placeholder="password" class=" f-input input-none " id="password" required minlength="6">
-				<img src="/attendence/img/show.png" alt="Show" class="input-icon" id="password-icon">
+				<img src="/img/show.png" alt="Show" class="input-icon" id="password-icon">
 			</div>		
 
 			<div class="f-input p0 d-fcc jc-sb" >
 				<input type="password" name="cpassword"placeholder="confirm password" class="f-input input-none" id="cpassword" required>
-				<img src="/attendence/img/show.png" alt="Show" class="input-icon" id="cpassword-icon">
+				<img src="/img/show.png" alt="Show" class="input-icon" id="cpassword-icon">
 
 			</div>
 
@@ -157,14 +157,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			let isPassword = passwordInput.type === "password";
 			passwordInput.type = isPassword ? "text" : "password";
 
-			this.src = isPassword ? "/attendence/img/hide.png" : "/attendence/img/show.png";
+			this.src = isPassword ? "/img/hide.png" : "/img/show.png";
 		});	
 
 		cpassIcon.addEventListener("click", function (){
 			let isPassword = cpasswordInput.type === "password";
 			cpasswordInput.type = isPassword ? "text" : "password";
 
-			this.src = isPassword ? "/attendence/img/hide.png" : "/attendence/img/show.png";
+			this.src = isPassword ? "/img/hide.png" : "/img/show.png";
 		});
 
 

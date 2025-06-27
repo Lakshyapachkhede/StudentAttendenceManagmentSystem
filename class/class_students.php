@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 				echo"<div class='user-row' style='width:100%;'>
 				<div class='user-row-left'>
-				<a class='user-row-name td-u' href='/attendence/" . $user_data['type']. "/profile.php?id=". $user_data['id'] . "&action=view'>" . $user_data['name'] . "</a>
+				<a class='user-row-name td-u' href='/" . $user_data['type']. "/profile.php?id=". $user_data['id'] . "&action=view'>" . $user_data['name'] . "</a>
 				<p>". $user_profile_data['roll_no'] ."</p>
 				<p class='user-row-date'>Joined: ".  getFormattedDate($row['date_joined']). " </p>
 
